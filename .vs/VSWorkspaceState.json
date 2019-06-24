@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\lib",
+    "\\lib\\src",
+    "\\lib\\src\\imgui",
+    "\\src",
+    "\\src\\alcubierre",
+    "\\src\\alcubierre\\libraries",
+    "\\src\\alcubierre\\libraries\\io",
+    "\\src\\cppc",
+    "\\src\\cppc\\render"
+  ],
+  "SelectedNode": "\\src\\main.cpp",
+  "PreviewInSolutionExplorer": false
+}

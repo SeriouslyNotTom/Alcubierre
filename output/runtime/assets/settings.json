@@ -1,0 +1,14 @@
+{
+  "settings": {
+    "video": {
+      "mode": "fullscreen",
+      "monitor": "primary"
+    }
+  },
+  "users": {
+    "c28e5bee-54a3-41d7-90ab-7dcf2395b8c0": {
+      "name": "TheModerGuy",
+      "password": "terrible password"
+    }
+  }
+}
