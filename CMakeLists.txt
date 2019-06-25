@@ -55,6 +55,7 @@ target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/steam_api6
 target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/DevIL.lib)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/ILU.lib)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/ILUT.lib)
+target_link_libraries(${PROJECT_NAME} shcore)
 endif(WIN32)
 
 if(UNIX)

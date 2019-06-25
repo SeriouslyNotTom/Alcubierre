@@ -41,13 +41,6 @@ namespace ImageLibrary
 		}
 	};
 
-	class ImageRenderer
-	{
-	public:
-		void RenderImage(GLuint texture_id, int x, int y, int w, int h)
-		{
 
-		}
-	};
 
 };

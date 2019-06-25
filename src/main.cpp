@@ -17,10 +17,7 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
-
-
-
-//#include <alcubierre/Alcubierre.cpp>
+#include <ShellScalingApi.h>
 
 void error_callback(int error, const char* description)
 {
@@ -31,19 +28,10 @@ static string log_file = "";
 
 int main(int argc, char *argv[])
 {
-	//Alcubierre::init(argc, argv);
-	profiler testprof = profiler();
-	testprof.in();
-	//sharing_is_caring::init();
-	//classer.fck = "ah fuck";
-	//test tester = test();
-	//tester.test_main(argc,argv);
+	SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 	fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJECT_VER_TYPE);
 	fprintf(stdout, "DEAR IMGUI VERSION: %s \n", ImGui::GetVersion());
-	testprof.out();
-	uint64_t nanos = testprof.nanos();
-	double millis = double(nanos / 1000);
-	//fprintf(stdout,"init took %s microseconds \n", to_string(millis).c_str());
+
 	
 	
 	if (glfwInit())
@@ -55,9 +43,8 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	Window main_window = Window(1088, 612);
+	Window main_window = Window(3456,1944);
 	
-	//Window second_window = Window(600, 480);
 	main_window.SetTitle(string(PROJECT_NAME_READABLE)+" [" + string(PROJECT_VER)+"-"+string(PROJECT_VER_TYPE)+"]");
 
 	GLFWwindow* raw_window = main_window.GetRawWindow();
@@ -67,10 +54,15 @@ int main(int argc, char *argv[])
 	IMGUI_CHECKVERSION();
 	
 	ImGui::CreateContext();
+
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
 	ImGui_ImplGlfw_InitForOpenGL(raw_window, true);
 	ImGui_ImplOpenGL3_Init("#version 150");
+
+	ImGuiStyle *current_style = &ImGui::GetStyle();
+	
+	ImGui::GetIO().FontGlobalScale = 2;
 	
 
 	glfwSwapInterval(1);
@@ -83,7 +75,8 @@ int main(int argc, char *argv[])
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::ShowMetricsWindow(&show_metrics_window);
+		
+		ImGui::ShowDemoWindow(&show_metrics_window);
 
 		ImGui::Render();
 
