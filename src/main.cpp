@@ -19,6 +19,7 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 #include <ShellScalingApi.h>
+#include <alcubierre/imgui-handler.cpp>
 
 void error_callback(int error, const char* description)
 {
@@ -41,16 +42,16 @@ int main(int argc, char *argv[])
 		glfwSetErrorCallback(error_callback);
 	}
 	else {
-		exit(EXIT_FAILURE);
+		::exit(EXIT_FAILURE);
 	}
 
-	Window main_window = Window(3456,1944);
+	Window main_window = Window(1152,648);
 	
 	main_window.SetTitle(string(PROJECT_NAME_READABLE)+" [" + string(PROJECT_VER)+"-"+string(PROJECT_VER_TYPE)+"]");
 
 	GLFWwindow* raw_window = main_window.GetRawWindow();
 
-	bool show_metrics_window = false;
+	bool show_demo_window = true;
 
 	IMGUI_CHECKVERSION();
 	
@@ -63,10 +64,16 @@ int main(int argc, char *argv[])
 
 	ImGuiStyle *current_style = &ImGui::GetStyle();
 	
-	ImGui::GetIO().FontGlobalScale = 2;
-	
+	current_style->FrameRounding = 0;
+	current_style->WindowRounding = 0;
+	ImGui::GetIO().FontGlobalScale = 1;
+	doColors();
 
 	glfwSwapInterval(1);
+
+	float f;
+	static float color[4] = { 0,0,1,1 };
+	bool show_imgui_debug = false;
 
 	while (!glfwWindowShouldClose(raw_window))
 	{		
@@ -77,8 +84,26 @@ int main(int argc, char *argv[])
 		ImGui::NewFrame();
 
 		
-		ImGui::ShowDemoWindow(&show_metrics_window);
+		if (show_demo_window)
+		{
+			ImGui::SetNextWindowPos(ImVec2(100, 100));
+			ImGui::Begin("Demo Window",NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize| ImGuiWindowFlags_NoMove);
+			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+			ImGui::Text("Dear ImGui %s", ImGui::GetVersion());
+			if (ImGui::Button("Show / Hide Test Window"))
+			{
+				show_imgui_debug = !show_imgui_debug;
+			}
+			ImGui::ColorEdit4("color", color, ImGuiColorEditFlags_PickerHueWheel);
+			ImGui::End();
 
+			if (show_imgui_debug)
+			{
+				ImGui::ShowDemoWindow(&show_imgui_debug);
+			}
+
+		}
+		
 		ImGui::Render();
 
 		int display_w, display_h;
@@ -93,5 +118,5 @@ int main(int argc, char *argv[])
 	}
 
 	glfwTerminate();
-	exit(EXIT_SUCCESS);
+	::exit(EXIT_SUCCESS);
 }

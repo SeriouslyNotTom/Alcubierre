@@ -1,3 +1,4 @@
+#if you are wondering why i'm not ignoring the entire vs dir, its beause vs stores launch configs in there (eg. launch without steam and other command line parameters)
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
@@ -8,6 +9,8 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 .vs/Alcubierre
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
 output/debug
 output/install
 .exe
