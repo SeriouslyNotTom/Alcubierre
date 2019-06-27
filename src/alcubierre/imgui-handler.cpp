@@ -1,3 +1,7 @@
+#ifndef IMGUI_HEADER_COLORS
+#define IMGUI_HEADER_COLORS
+
+
 #include <imgui.h>
 
 void doColors()
@@ -54,3 +58,6 @@ void doColors()
 
 
 }
+
+
+#endif

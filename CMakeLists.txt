@@ -46,6 +46,7 @@ configure_file(${PROJECT_SOURCE_DIR}/src/config.h.in ${PROJECT_SOURCE_DIR}/src/c
 find_package(OpenGL REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARY})
 
+
 #platform linking
 #idealy i want to replace these with source builds so no more platform errors
 if(WIN32)

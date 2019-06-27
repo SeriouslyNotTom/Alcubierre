@@ -9,9 +9,9 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 .vs/Alcubierre
-.vs/slnx.sqlite
-.vs/VSWorkspaceState.json
 output/debug
 output/install
 .exe
 src/config.h
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json

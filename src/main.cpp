@@ -2,12 +2,10 @@
 #define APIENTRY __stdcall
 #endif
 
-
 #define GLFW_INCLUDE_NONE
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 
-//test git
-
+//#include <alcubierre/imgui-handler.cpp>
 #include <config.h>
 #include <alcubierre/settings/entry_settings.cpp>
 #include <glad/glad.h>
@@ -19,7 +17,8 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 #include <ShellScalingApi.h>
-#include <alcubierre/imgui-handler.cpp>
+
+#include <nlohmann/json.hpp>
 
 void error_callback(int error, const char* description)
 {
@@ -34,8 +33,10 @@ int main(int argc, char *argv[])
 	fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJECT_VER_TYPE);
 	fprintf(stdout, "DEAR IMGUI VERSION: %s \n", ImGui::GetVersion());
 
-	
-	
+	auto settings = nlohmann::json::parse("{\"settings\":{\"scale\":2,\"w\":3000,\"h\":2000}}");
+
+	int scaling = settings["settings"]["scale"];
+
 	if (glfwInit())
 	{
 		fprintf(stdout, "GLFW [%s] LOADED \n", glfwGetVersionString());
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
 		::exit(EXIT_FAILURE);
 	}
 
-	Window main_window = Window(1152,648);
+	Window main_window = Window(3000,2000);
 	
 	main_window.SetTitle(string(PROJECT_NAME_READABLE)+" [" + string(PROJECT_VER)+"-"+string(PROJECT_VER_TYPE)+"]");
 
@@ -66,8 +67,10 @@ int main(int argc, char *argv[])
 	
 	current_style->FrameRounding = 0;
 	current_style->WindowRounding = 0;
-	ImGui::GetIO().FontGlobalScale = 1;
-	doColors();
+	current_style->TabRounding = 0;
+	current_style->ScrollbarRounding = 0;
+	ImGui::GetIO().FontGlobalScale = scaling;
+	//doColors();
 
 	glfwSwapInterval(1);
 
@@ -87,7 +90,7 @@ int main(int argc, char *argv[])
 		if (show_demo_window)
 		{
 			ImGui::SetNextWindowPos(ImVec2(100, 100));
-			ImGui::Begin("Demo Window",NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize| ImGuiWindowFlags_NoMove);
+			ImGui::Begin("Demo Window",NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize| ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize);
 			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
 			ImGui::Text("Dear ImGui %s", ImGui::GetVersion());
 			if (ImGui::Button("Show / Hide Test Window"))
