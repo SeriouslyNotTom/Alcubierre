@@ -30,10 +30,12 @@ file(GLOB SRC
 # Add source to this project's executable.
 add_executable (${PROJECT_NAME} WIN32 ${SRC})
 
+if(WIN32)
 set_target_properties(${PROJECT_NAME} PROPERTIES 
 LINK_FLAGS /SUBSYSTEM:WINDOWS
 LINK_FLAGS /entry:mainCRTStartup
 )
+endif(WIN32)
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
 # versioning and maybe more stuff later

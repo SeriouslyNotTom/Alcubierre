@@ -16,8 +16,9 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+#ifdef _WIN32
 #include <ShellScalingApi.h>
-
+#endif
 #include <nlohmann/json.hpp>
 
 void error_callback(int error, const char* description)
@@ -29,8 +30,10 @@ static string log_file = "";
 
 int main(int argc, char *argv[])
 {
-	SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
-	fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJECT_VER_TYPE);
+#ifdef _WIN32	
+SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
+#endif	
+fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJECT_VER_TYPE);
 	fprintf(stdout, "DEAR IMGUI VERSION: %s \n", ImGui::GetVersion());
 
 	auto settings = nlohmann::json::parse("{\"settings\":{\"scale\":2,\"w\":3000,\"h\":2000}}");
