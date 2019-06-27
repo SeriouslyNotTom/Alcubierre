@@ -4,10 +4,13 @@
 #include <functional>
 #include <vector>
 #include <iostream>
-
+#include <stdlib.h>
+#include <string>
 
 class Window
 {
+	
+
 private:
 	int _xpos, _ypos;
 	int _width, _height;
@@ -22,7 +25,9 @@ private:
 	void _InitWindow()
 	{
 		if (_window_title == "") { _window_title = "WINDOW"; }
+		fprintf(stderr,"\033[31mhinting window\n\033[0m");
 		PerformHints();
+		fprintf(stderr,"\033[31mglfwcreatewindow\n\033[0m");
 		_glfw_window = glfwCreateWindow(_requested_width, _requested_height, _window_title.c_str(), NULL, NULL);
 		glfwMakeContextCurrent(_glfw_window);
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -40,6 +45,7 @@ private:
 
 	void _FirstHints()
 	{
+		fprintf(stderr,"\033[31mfirsthints\n\033[0m");
 		//glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 		//glfwWindowHint(GLFW_MAXIMIZED, GL_TRUE);
 		glfwWindowHint(GLFW_DECORATED, GL_TRUE);

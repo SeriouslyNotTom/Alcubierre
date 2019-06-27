@@ -26,6 +26,8 @@ void error_callback(int error, const char* description)
 	fprintf(stderr, "Error Code: %i ; %s\n", description);
 }
 
+void logthis(string thing){fprintf(stderr,"\033[31m%s\n\033[0m",thing.c_str());}
+
 static string log_file = "";
 
 int main(int argc, char *argv[])
@@ -49,7 +51,9 @@ fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJ
 		::exit(EXIT_FAILURE);
 	}
 
-	Window main_window = Window(3000,2000);
+	logthis("creating window");
+	Window main_window = Window(1000,600);
+	logthis("window created");
 	
 	main_window.SetTitle(string(PROJECT_NAME_READABLE)+" [" + string(PROJECT_VER)+"-"+string(PROJECT_VER_TYPE)+"]");
 
@@ -74,8 +78,6 @@ fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJ
 	current_style->ScrollbarRounding = 0;
 	ImGui::GetIO().FontGlobalScale = scaling;
 	//doColors();
-
-	glfwSwapInterval(1);
 
 	float f;
 	static float color[4] = { 0,0,1,1 };
