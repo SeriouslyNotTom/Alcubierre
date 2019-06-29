@@ -14,17 +14,17 @@ include_directories("src")
 include_directories("include")
 include_directories("lib/src/imgui")
 
-#this is very very bad but i do not know if cmake supports recursive wildcards
-file(GLOB SRC
-    "src/*.cpp"
-	"src/*.h"
-	"src/*/*.cpp"
-	"src/*/*.h"
-	"src/*/*/*.cpp"
-	"src/*/*/*.h"
-	"main.*"
-	"lib/src/imgui/*.cpp"
-	"lib/src/imgui/*.h"
+file(GLOB imgui_src
+	lib/src/imgui/*.cpp
+	lib/src/imgui/*.h
+)
+
+file(GLOB_RECURSE SRC 
+	src/*.cpp 
+	src/*.h 
+	main.cpp
+	main.h
+	${imgui_src}
 )
 
 # Add source to this project's executable.

@@ -2,6 +2,10 @@
 
 #include <glad/glad.h>
 #include <IL/devil_cpp_wrapper.hpp>
+#include <string>
+#include <stdlib.h>
+
+using namespace std;
 
 namespace ImageLibrary 
 {

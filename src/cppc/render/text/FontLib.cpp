@@ -1,8 +1,15 @@
 #include <glad/glad.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include <string>
+#include <glm/glm.hpp>
+#include <map>
 #include <stdlib.h>
-#include <locale> 
+#include <locale>
+#include <algorithm>
+#include <alcubierre/libraries/io/FileIO.h>
+
+using namespace std;
 
 namespace Font {
 
@@ -47,8 +54,11 @@ namespace Font {
 			}
 
 			//load fallback font
-
-			if (LoadFontByPath(asset_path + "fonts/arial.ttf"))
+			char* font = "fonts / arial.ttf";
+			char* path = new char[strlen(ASSET_PATH) + strlen(font)];
+			strcpy(path, ASSET_PATH);
+			strcat(path, font);
+			if (LoadFontByPath(path))
 			{
 				FallbackFont = FontStorage["arial"];
 			}

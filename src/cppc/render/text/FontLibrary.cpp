@@ -1,6 +1,13 @@
 #include <glad/glad.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include <string>
+#include <stdlib.h>
+#include <map>
+#include <glm/glm.hpp>
+#include <iostream>
+
+using namespace std;
 
 namespace FontLibrary {
 
@@ -12,7 +19,7 @@ namespace FontLibrary {
 	};
 
 	struct strcFont {
-		std::string FontName;
+		string FontName;
 		int FontSize;
 		int FontScale;
 		std::map<GLchar, strcGlyph> FontGlyphs;

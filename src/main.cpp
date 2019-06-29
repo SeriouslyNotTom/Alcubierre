@@ -6,6 +6,7 @@
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 
 //#include <alcubierre/imgui-handler.cpp>
+#include <Windows.h>
 #include <config.h>
 #include <alcubierre/settings/entry_settings.cpp>
 #include <glad/glad.h>
@@ -19,16 +20,15 @@
 #ifdef _WIN32
 #include <ShellScalingApi.h>
 #endif
-#include <nlohmann/json.hpp>
+#include <alcubierre/libraries/io/FileIO.h>
+#include <alcubierre/forensics/Logging.h>
+#include <alcubierre/libraries/settings/Settings.h>
+
 
 void error_callback(int error, const char* description)
 {
 	fprintf(stderr, "Error Code: %i ; %s\n", description);
 }
-
-void logthis(string thing){fprintf(stderr,"\033[31m%s\n\033[0m",thing.c_str());}
-
-static string log_file = "";
 
 int main(int argc, char *argv[])
 {
@@ -37,11 +37,9 @@ SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 #endif	
 fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJECT_VER_TYPE);
 	fprintf(stdout, "DEAR IMGUI VERSION: %s \n", ImGui::GetVersion());
-
-	auto settings = nlohmann::json::parse("{\"settings\":{\"scale\":2,\"w\":3000,\"h\":2000}}");
-
-	int scaling = settings["settings"]["scale"];
-
+	Logger::General("DEAR IMGUI");
+	struct Video_Settings vs;
+	vs = Settings::LoadSettings("C:\\Users\\Tom\\AppData\\Roaming\\Alcubierre\\settings.json");
 	if (glfwInit())
 	{
 		fprintf(stdout, "GLFW [%s] LOADED \n", glfwGetVersionString());
@@ -51,20 +49,14 @@ fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJ
 		::exit(EXIT_FAILURE);
 	}
 
-	logthis("creating window");
-	Window main_window = Window(1000,600);
-	logthis("window created");
 	
+	Window main_window = Window(vs.Width,vs.Height);
 	main_window.SetTitle(string(PROJECT_NAME_READABLE)+" [" + string(PROJECT_VER)+"-"+string(PROJECT_VER_TYPE)+"]");
-
 	GLFWwindow* raw_window = main_window.GetRawWindow();
 
 	bool show_demo_window = true;
-
 	IMGUI_CHECKVERSION();
-	
 	ImGui::CreateContext();
-
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
 	ImGui_ImplGlfw_InitForOpenGL(raw_window, true);
@@ -76,7 +68,7 @@ fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJ
 	current_style->WindowRounding = 0;
 	current_style->TabRounding = 0;
 	current_style->ScrollbarRounding = 0;
-	ImGui::GetIO().FontGlobalScale = scaling;
+	ImGui::GetIO().FontGlobalScale = vs.ScalingFactor;
 	//doColors();
 
 	float f;
