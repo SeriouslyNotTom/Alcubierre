@@ -13,6 +13,11 @@
 		LogFunc("[General] ", msg);
 	}
 
+	void Logger::Raw(char* msg)
+	{
+		LogFunc("", msg);
+	}
+
 	void Logger::LogFunc(char* Header, char* msg)
 	{
 		char* output = new char[strlen(Header) + strlen(msg)];

@@ -23,6 +23,8 @@
 #include <alcubierre/libraries/io/FileIO.h>
 #include <alcubierre/forensics/Logging.h>
 #include <alcubierre/libraries/settings/Settings.h>
+#include <alcubierre/libraries/render/RenderManager.h>
+#include <alcubierre/libraries/debug/ImGui_Handler.h>
 
 
 void error_callback(int error, const char* description)
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
 #ifdef _WIN32	
 SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 #endif	
-fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJECT_VER_TYPE);
+	fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJECT_VER_TYPE);
 	fprintf(stdout, "DEAR IMGUI VERSION: %s \n", ImGui::GetVersion());
 	Logger::General("DEAR IMGUI");
 	struct Video_Settings vs;
@@ -49,6 +51,7 @@ fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJ
 		::exit(EXIT_FAILURE);
 	}
 
+	RenderManager::DoRenders();
 	
 	Window main_window = Window(vs.Width,vs.Height);
 	main_window.SetTitle(string(PROJECT_NAME_READABLE)+" [" + string(PROJECT_VER)+"-"+string(PROJECT_VER_TYPE)+"]");
@@ -61,19 +64,22 @@ fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJ
 	ImGui::StyleColorsDark();
 	ImGui_ImplGlfw_InitForOpenGL(raw_window, true);
 	ImGui_ImplOpenGL3_Init("#version 150");
-
-	ImGuiStyle *current_style = &ImGui::GetStyle();
-	
-	current_style->FrameRounding = 0;
-	current_style->WindowRounding = 0;
-	current_style->TabRounding = 0;
-	current_style->ScrollbarRounding = 0;
 	ImGui::GetIO().FontGlobalScale = vs.ScalingFactor;
-	//doColors();
+	ImGui_Handler::ApplyColors();
+	ImGui_Handler::ApplyStyles();
 
 	float f;
 	static float color[4] = { 0,0,1,1 };
 	bool show_imgui_debug = false;
+
+	char ver_buf[100];
+	snprintf(ver_buf,100,"OPENGL VERSION: %s \r", glGetString(GL_VERSION));
+	Logger::Raw(ver_buf);
+	char hard_buf[100];
+	snprintf(hard_buf, 100, "VIDEO HARDWARE: %s %s \r", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
+	Logger::Raw(hard_buf);
+
+	bool thing = false;
 
 	while (!glfwWindowShouldClose(raw_window))
 	{		
@@ -83,6 +89,28 @@ fprintf(stdout, "%s VERSION: %s-%s \n", PROJECT_NAME_READABLE, PROJECT_VER, PROJ
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
+		if (ImGui::BeginMainMenuBar())
+		{
+			if (ImGui::BeginMenu("Debug"))
+			{
+				if (ImGui::BeginMenu("Info"))
+				{
+					ImGui::Text("this is some text ijih8j38j3j84ht8h48hht84h8ht484ht8ht48ht48h8wwoid");
+					ImGui::EndMenu();
+				}
+				if (ImGui::MenuItem("thing", "things stuff")) {}
+				ImGui::Text("test text", "this is test");
+				if (ImGui::BeginMenu("Flags"))
+				{
+					ImGui::MenuItem("Movable", NULL, &thing);
+					ImGui::MenuItem("not movable", NULL, true);
+					ImGui::EndMenu();
+				}
+				
+				ImGui::EndMenu();
+			}
+			ImGui::EndMainMenuBar();
+		}
 		
 		if (show_demo_window)
 		{

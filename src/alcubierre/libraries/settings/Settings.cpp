@@ -10,8 +10,7 @@ Video_Settings Settings::LoadSettings(char* path)
 {
 	struct Video_Settings vs;
 	char* file = FileIO::ReadEntireFile(path);
-	Logger::General("file:");
-	Logger::General(file);
+	Logger::General("Loading Settings.json");
 	auto settings = nlohmann::json::parse(file);
 	vs.ScalingFactor = settings["settings"]["scaling"];
 	vs.Width = settings["settings"]["width"];

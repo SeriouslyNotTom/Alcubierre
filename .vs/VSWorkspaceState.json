@@ -3,14 +3,14 @@
     "",
     "\\lib",
     "\\lib\\src",
-    "\\lib\\src\\imgui",
     "\\src",
     "\\src\\alcubierre",
+    "\\src\\alcubierre\\forensics",
     "\\src\\alcubierre\\libraries",
-    "\\src\\alcubierre\\libraries\\io",
-    "\\src\\cppc",
-    "\\src\\cppc\\render"
+    "\\src\\alcubierre\\libraries\\render",
+    "\\src\\alcubierre\\libraries\\settings",
+    "\\src\\cppc"
   ],
-  "SelectedNode": "\\src\\main.cpp",
+  "SelectedNode": "\\src\\alcubierre\\libraries\\render\\RenderManager.cpp",
   "PreviewInSolutionExplorer": false
 }

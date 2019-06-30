@@ -1,3 +1,5 @@
+#pragma once
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
@@ -6,10 +8,10 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <alcubierre/forensics/Logging.h>
 
 class Window
 {
-	
 
 private:
 	int _xpos, _ypos;
@@ -25,9 +27,9 @@ private:
 	void _InitWindow()
 	{
 		if (_window_title == "") { _window_title = "WINDOW"; }
-		fprintf(stderr,"\033[31mhinting window\n\033[0m");
+		Logger::General("Hinting Window");
 		PerformHints();
-		fprintf(stderr,"\033[31mglfwcreatewindow\n\033[0m");
+		Logger::General("glfwCreateWindow");
 		_glfw_window = glfwCreateWindow(_requested_width, _requested_height, _window_title.c_str(), NULL, NULL);
 		glfwMakeContextCurrent(_glfw_window);
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -35,8 +37,6 @@ private:
 			std::cout << "Failed to initialize OpenGL context" << std::endl;
 			exit(EXIT_FAILURE);
 		}
-		printf("OPENGL VERSION: %s \n", glGetString(GL_VERSION));
-		printf("VIDEO HARDWARE: %s %s \n", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 		glViewport(0, 0, _width, _height);
 		glfwGetWindowSize(_glfw_window, &_width, &_height);
 		glfwGetWindowPos(_glfw_window, &_xpos, &_ypos);
@@ -45,7 +45,6 @@ private:
 
 	void _FirstHints()
 	{
-		fprintf(stderr,"\033[31mfirsthints\n\033[0m");
 		//glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 		//glfwWindowHint(GLFW_MAXIMIZED, GL_TRUE);
 		glfwWindowHint(GLFW_DECORATED, GL_TRUE);
@@ -75,7 +74,9 @@ public:
 
 	void PerformHints()
 	{
+		Logger::General("First Hints");
 		_FirstHints();
+		Logger::General("Hooked Hints");
 		//for each (HintCallback cb in _callbacks) { cb(); }
 	}
 	
