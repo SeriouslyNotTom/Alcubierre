@@ -3,15 +3,16 @@
     "",
     "\\lib",
     "\\lib\\src",
+    "\\lib\\src\\imgui",
     "\\src",
     "\\src\\alcubierre",
-    "\\src\\alcubierre\\forensics",
     "\\src\\alcubierre\\libraries",
     "\\src\\alcubierre\\libraries\\debug",
-    "\\src\\alcubierre\\libraries\\render",
+    "\\src\\alcubierre\\libraries\\io",
+    "\\src\\alcubierre\\libraries\\settings",
     "\\src\\cppc",
     "\\src\\cppc\\render"
   ],
-  "SelectedNode": "\\src\\main.cpp",
+  "SelectedNode": "\\src\\alcubierre\\libraries\\debug\\ImGui_Handler.cpp",
   "PreviewInSolutionExplorer": false
 }

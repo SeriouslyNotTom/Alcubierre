@@ -14,6 +14,7 @@ public:
 	void ApplyStyles();
 	void Init();
 	void Render();
-
-
+	const typedef std::function<void(void)> ImGuiFrameStartCB;
+	std::vector<ImGuiFrameStartCB> frame_start_callbacks_;
+	void AddFrameStart(ImGuiFrameStartCB *cbf);
 };

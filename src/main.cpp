@@ -12,6 +12,8 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <imgui.h>
+#include <imgui_demo.cpp>
 
 #include <config.h>
 #include <alcubierre/forensics/Logging.h>
@@ -39,6 +41,11 @@ void windowCreation(Window* win)
 	win->scaling_factor = VideoSettings.ScalingFactor;
 
 	Logger::General(std::to_string(win->requested_width_).c_str());
+}
+
+void ImGuiFrameStart()
+{
+	ImGui::ShowDemoWindow();
 }
 
 int main(int argc, char *argv[])
@@ -72,6 +79,7 @@ int main(int argc, char *argv[])
 	RenderManager renman;
 	renman.mywindow = window;
 	ImGui_Handler dear = ImGui_Handler();
+	//dear.AddFrameStart(&frame_start);
 	renman.Add(&dear);
 
 	renman.Init();

@@ -8,7 +8,10 @@
 
 void ImGui_Handler::ImGui_Frame_Start()
 {
-	ImGui::ShowDemoWindow();
+	for (ImGuiFrameStart cbf : frame_start_callbacks_)
+	{
+		cbf();
+	}
 }
 
 void ImGui_Handler::AcceptWindow(Window* window)
@@ -100,9 +103,14 @@ void ImGui_Handler::Render()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-
+	
 	this->ImGui_Frame_Start();
 
 	ImGui::Render();	
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void ImGui_Handler::AddFrameStart(ImGuiFrameStartCB *cbf)
+{
+	this->frame_start_callbacks_.push_back(*cbf);
 }
