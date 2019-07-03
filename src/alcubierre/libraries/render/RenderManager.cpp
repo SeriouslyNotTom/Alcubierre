@@ -1,28 +1,28 @@
 #include <alcubierre/libraries/render/RenderManager.h>
 #include <alcubierre/forensics/Logging.h>
-#include <cppc/render/window_manager.cpp>
 
-
-class TestClass : public Renderable {
-public:
-	void Render()
-	{
-		Logger::General("this is a virtual function from testclas");
-	}
-
-	void AcceptWindow(Window* window)
-	{
-		windowobj = window;
-	}
-private:
-	Window* windowobj;
-};
-
-void RenderManager::DoRenders()
+void RenderManager::Add(Renderable* obj)
 {
-	TestClass tc = TestClass();
-	Renderable* renptr = &tc;
-	renptr->Render();
-	bool is = dynamic_cast<Renderable*>(&tc);
-	bool ije = true;
+	RenderOBJs_.push_back(obj);
+}
+
+void RenderManager::DoRenders_()
+{
+	for (Renderable* & OBJ : RenderOBJs_) {
+		OBJ->Render();
+	}
+}
+
+void RenderManager::Init()
+{
+	for (Renderable* & OBJ : RenderOBJs_)
+	{
+		OBJ->AcceptWindow(mywindow);
+		OBJ->Init();
+	}
+}
+
+void RenderManager::Render_HOOK()
+{
+	this->DoRenders_();
 }

@@ -1,6 +1,8 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 project(alcubierre VERSION 0.1.0.0) # MAJOR.MINOR.PATCH.TWEAK
 
+#set(CMAKE_BUILD_TYPE Debug)
+
 SET(VERSION_TYPE "IDB") # "(I)n (D)evelopment (B)uild"
 #SET(VERSION_TYPE "RCB") # "(R)elease (C)andidate (B)uild"
 #SET(VERSION_TYPE "PVB") # "(P)re(V)iew (B)uild"

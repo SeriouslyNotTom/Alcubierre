@@ -1,10 +1,9 @@
-#include <cppc/render/window_manager.cpp>
+#pragma once
 
-class RenderManager
-{
-public:
-	static void DoRenders();
-};
+#include <alcubierre/libraries/render/WindowManager.h>
+#include <stdlib.h>
+#include <functional>
+#include <vector>
 
 class Renderable
 {
@@ -15,4 +14,16 @@ public:
 	virtual void PreRender() {};
 	virtual void Render() {};
 	virtual void PostRender() {};
+};
+
+class RenderManager
+{
+public:
+	void Add(Renderable* obj);
+	void Render_HOOK();
+	void Init();
+	Window* mywindow;
+private:
+	std::vector<Renderable*> RenderOBJs_;
+	void DoRenders_();
 };

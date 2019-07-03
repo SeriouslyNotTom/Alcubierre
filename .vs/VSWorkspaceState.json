@@ -7,10 +7,11 @@
     "\\src\\alcubierre",
     "\\src\\alcubierre\\forensics",
     "\\src\\alcubierre\\libraries",
+    "\\src\\alcubierre\\libraries\\debug",
     "\\src\\alcubierre\\libraries\\render",
-    "\\src\\alcubierre\\libraries\\settings",
-    "\\src\\cppc"
+    "\\src\\cppc",
+    "\\src\\cppc\\render"
   ],
-  "SelectedNode": "\\src\\alcubierre\\libraries\\render\\RenderManager.cpp",
+  "SelectedNode": "\\src\\main.cpp",
   "PreviewInSolutionExplorer": false
 }

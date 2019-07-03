@@ -7,14 +7,26 @@
 #include <iostream>
 
 class Window {
-private:
-	int _xpos, _ypos;
-	int _width, _height;
-	std::string _window_title;
-	GLFWwindow* _glfw_window;
-	GLFWmonitor* _glfw_monitor;
-	GLFWwindow* _glfw_share_window;
-	int _requested_width, _requested_height;
+public:
+	int xpos_, ypos_;
+	int width_, height_;
+	std::string window_title_;
+	GLFWwindow* glfw_share_window_;
+	int requested_width_, requested_height_;
 	typedef std::function<void(void)> HintCallback;
-	std::vector<HintCallback> _callbacks;
+	std::vector<HintCallback> hint_callbacks_;
+	GLFWmonitor* glfw_monitor;
+	GLFWwindow* glfw_window;
+	int scaling_factor;
+
+	void CenterWindow(GLFWmonitor *monitor);
+
+private:
+	
 };
+
+class WindowManager {
+public:
+	const typedef std::function<void(Window*)> WindowCreationCallback;
+	Window* newWindow(WindowCreationCallback *create_callback);
+;};

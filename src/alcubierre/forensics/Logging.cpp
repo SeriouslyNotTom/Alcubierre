@@ -6,9 +6,11 @@
 #endif
 #include <iostream>
 #include <string>
+#include <stdlib.h>
+#include <string>
 
 
-	void Logger::General(char* msg)
+	void Logger::General(std::string msg)
 	{
 		LogFunc("[General] ", msg);
 	}
@@ -18,11 +20,11 @@
 		LogFunc("", msg);
 	}
 
-	void Logger::LogFunc(char* Header, char* msg)
+	void Logger::LogFunc(char* Header, std::string msg)
 	{
-		char* output = new char[strlen(Header) + strlen(msg)];
+		char* output = new char[strlen(Header) + strlen(msg.c_str())];
 		strcpy(output, Header);
-		strcat(output, msg);
+		strcat(output, msg.c_str());
 		strcat(output, "\n");
 
 #ifdef _WIN32

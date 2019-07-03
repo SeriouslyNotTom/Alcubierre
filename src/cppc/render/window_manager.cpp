@@ -27,7 +27,6 @@ private:
 	void _InitWindow()
 	{
 		if (_window_title == "") { _window_title = "WINDOW"; }
-		Logger::General("Hinting Window");
 		PerformHints();
 		Logger::General("glfwCreateWindow");
 		_glfw_window = glfwCreateWindow(_requested_width, _requested_height, _window_title.c_str(), NULL, NULL);
@@ -40,7 +39,7 @@ private:
 		glViewport(0, 0, _width, _height);
 		glfwGetWindowSize(_glfw_window, &_width, &_height);
 		glfwGetWindowPos(_glfw_window, &_xpos, &_ypos);
-		CenterWindow();
+		//CenterWindow();
 	}
 
 	void _FirstHints()
@@ -83,14 +82,6 @@ public:
 	void RegisterHintCallback(const HintCallback &cb)
 	{
 		_callbacks.push_back(cb);
-	}
-
-	bool CenterWindow()
-	{
-		GLFWmonitor* primary = glfwGetPrimaryMonitor();
-		const GLFWvidmode* mode = glfwGetVideoMode(primary);
-		glfwSetWindowPos(_glfw_window, (mode->width / 2) - (_width / 2), (mode->height / 2) - (_height / 2));
-		return true;
 	}
 
 	GLFWwindow* GetRawWindow(){return _glfw_window;}
