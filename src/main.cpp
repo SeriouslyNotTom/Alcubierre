@@ -19,6 +19,7 @@
 #include <alcubierre/libraries/render/WindowManager.h>
 #include <alcubierre/libraries/render/RenderManager.h>
 #include <alcubierre/libraries/debug/ImGui_Handler.h>
+#include <alcubierre/libraries/settings/Settings.h>
 
 using namespace std;
 
@@ -27,13 +28,15 @@ void error_callback(int error, const char* description)
 	fprintf(stderr, "Error Code: %i ; %s\n", description);
 }
 
+Video_Settings VideoSettings;
+
 void windowCreation(Window* win)
 {
-	win->requested_width_ = 1000;
-	win->requested_height_ = 600;
+	win->requested_width_ = VideoSettings.Width;
+	win->requested_height_ = VideoSettings.Height;
 	win->glfw_monitor = NULL;
 	win->window_title_ = PROJECT_NAME_READABLE;
-	win->scaling_factor = 1;
+	win->scaling_factor = VideoSettings.ScalingFactor;
 
 	Logger::General(std::to_string(win->requested_width_).c_str());
 }
@@ -46,6 +49,11 @@ int main(int argc, char *argv[])
 		fprintf(stdout, "GLFW [%s] LOADED \n", glfwGetVersionString());
 		glfwSetErrorCallback(error_callback);
 	}
+
+	char* settings_file = new char[200];
+	strcpy(settings_file, getenv("APPDATA"));
+	strcat(settings_file, "\\Alcubierre\\settings.json");
+	VideoSettings = Settings::LoadSettings(settings_file);
 
 	WindowManager winman = WindowManager();
 	Logger::Raw(__FUNCTION__);
@@ -79,6 +87,6 @@ int main(int argc, char *argv[])
 
 		renman.Render_HOOK();
 
-		glfwSwapBuffers(window->glfw_window);
+		glfwSwapBuffers(window->glfw_window); 
 	}
 }
