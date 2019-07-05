@@ -42,9 +42,9 @@ void Console::Render()
 
 	// Command-line
 	bool reclaim_focus = false;
-	ImGui::PushItemWidth(ImGui::GetWindowWidth() - 50);
+	ImGui::PushItemWidth(ImGui::GetWindowWidth() - 50*2);
 	ImGui::InputText("", inputbuff, IM_ARRAYSIZE(inputbuff), ImGuiInputTextFlags_EnterReturnsTrue);
-	ImGui::SameLine(ImGui::GetWindowWidth() - 40);
+	ImGui::SameLine(ImGui::GetWindowWidth() - 40*2);
 	ImGui::AlignTextToFramePadding();
 	ImGui::Button("doit");
 	// Auto-focus on window apparition

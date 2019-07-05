@@ -28,7 +28,7 @@ void ImGui_Handler::ApplyColors()
 	colors[ImGuiCol_WindowBg] = ImVec4(0.07f, 0.01f, 0.10f, 0.94f);
 	colors[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 	colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
-	colors[ImGuiCol_Border] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
+	colors[ImGuiCol_Border] = ImVec4(0.71f, 0.00f, 1.00f, 1.00f);
 	colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 	colors[ImGuiCol_FrameBg] = ImVec4(0.38f, 0.16f, 0.48f, 0.54f);
 	colors[ImGuiCol_FrameBgHovered] = ImVec4(0.77f, 0.26f, 0.98f, 0.40f);
@@ -71,6 +71,11 @@ void ImGui_Handler::ApplyColors()
 	colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
 	colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
 	colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
+
+	
+	
+
+
 }
 
 void ImGui_Handler::ApplyStyles()
@@ -80,11 +85,11 @@ void ImGui_Handler::ApplyStyles()
 	current_style->WindowRounding = 0;
 	current_style->TabRounding = 0;
 	current_style->ScrollbarRounding = 0;
-	current_style->WindowBorderSize = 0;
+	current_style->WindowBorderSize = 1;
 	current_style->ChildBorderSize = 0;
 	current_style->FrameBorderSize = 0;
 	current_style->PopupBorderSize = 0;
-	current_style->WindowPadding = ImVec2(4, 4);
+	current_style->WindowPadding = ImVec2(4*window_->scaling_factor, 4*window_->scaling_factor);
 }
 
 void ImGui_Handler::Init()

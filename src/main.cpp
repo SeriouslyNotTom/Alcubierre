@@ -98,6 +98,8 @@ int main(int argc, char *argv[])
 	renman.Add(&dear);
 	renman.Init();
 
+	glfwSwapInterval(0);
+
 	while (!glfwWindowShouldClose(window->glfw_window))
 	{
 		glfwPollEvents();
@@ -109,7 +111,6 @@ int main(int argc, char *argv[])
 		glClearColor(0, 0, 0.3, 1);
 
 		renman.Render_HOOK();
-		
 
 		glfwSwapBuffers(window->glfw_window); 
 	}
