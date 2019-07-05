@@ -9,10 +9,8 @@
     "\\src\\alcubierre\\libraries",
     "\\src\\alcubierre\\libraries\\debug",
     "\\src\\alcubierre\\libraries\\io",
-    "\\src\\alcubierre\\libraries\\settings",
-    "\\src\\cppc",
-    "\\src\\cppc\\render"
+    "\\src\\alcubierre\\libraries\\render"
   ],
-  "SelectedNode": "\\src\\alcubierre\\libraries\\debug\\ImGui_Handler.cpp",
+  "SelectedNode": "\\src\\alcubierre\\libraries\\debug\\Console.cpp",
   "PreviewInSolutionExplorer": false
 }

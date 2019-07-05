@@ -1,4 +1,6 @@
-﻿#ifdef _WIN32
+﻿#pragma once
+
+#ifdef _WIN32
 #define APIENTRY __stdcall
 #endif
 
@@ -13,7 +15,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <imgui.h>
-#include <imgui_demo.cpp>
 
 #include <config.h>
 #include <alcubierre/forensics/Logging.h>
@@ -22,6 +23,7 @@
 #include <alcubierre/libraries/render/RenderManager.h>
 #include <alcubierre/libraries/debug/ImGui_Handler.h>
 #include <alcubierre/libraries/settings/Settings.h>
+#include <alcubierre/libraries/debug/Console.h>
 
 using namespace std;
 
@@ -31,6 +33,21 @@ void error_callback(int error, const char* description)
 }
 
 Video_Settings VideoSettings;
+Console* con;
+
+void ImGui_Callback()
+{
+	ImGui::BeginMainMenuBar();
+	if (ImGui::BeginMenu("fuck"))
+	{
+		ImGui::EndMenu();
+	}	
+	ImGui::EndMainMenuBar();
+
+	ImGui::ShowDemoWindow();
+	con->Render();
+
+}
 
 void windowCreation(Window* win)
 {
@@ -41,11 +58,6 @@ void windowCreation(Window* win)
 	win->scaling_factor = VideoSettings.ScalingFactor;
 
 	Logger::General(std::to_string(win->requested_width_).c_str());
-}
-
-void ImGuiFrameStart()
-{
-	ImGui::ShowDemoWindow();
 }
 
 int main(int argc, char *argv[])
@@ -76,13 +88,16 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	con = new Console();
+	con->Init();
+
 	RenderManager renman;
 	renman.mywindow = window;
 	ImGui_Handler dear = ImGui_Handler();
-	//dear.AddFrameStart(&frame_start);
+	dear.AddFrameStart(*ImGui_Callback);
 	renman.Add(&dear);
-
 	renman.Init();
+
 	while (!glfwWindowShouldClose(window->glfw_window))
 	{
 		glfwPollEvents();
@@ -94,6 +109,7 @@ int main(int argc, char *argv[])
 		glClearColor(0, 0, 0.3, 1);
 
 		renman.Render_HOOK();
+		
 
 		glfwSwapBuffers(window->glfw_window); 
 	}

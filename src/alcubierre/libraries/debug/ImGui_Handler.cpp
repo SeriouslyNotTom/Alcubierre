@@ -1,5 +1,6 @@
-#include <alcubierre/libraries/debug/ImGui_Handler.h>
+#pragma once
 
+#include <alcubierre/libraries/debug/ImGui_Handler.h>
 #include <alcubierre/libraries/render/RenderManager.h>
 #include <alcubierre/libraries/render/WindowManager.h>
 #include <imgui.h>
@@ -8,7 +9,7 @@
 
 void ImGui_Handler::ImGui_Frame_Start()
 {
-	for (ImGuiFrameStart cbf : frame_start_callbacks_)
+	for (void(*cbf)() : frame_start_callbacks_)
 	{
 		cbf();
 	}
@@ -83,6 +84,7 @@ void ImGui_Handler::ApplyStyles()
 	current_style->ChildBorderSize = 0;
 	current_style->FrameBorderSize = 0;
 	current_style->PopupBorderSize = 0;
+	current_style->WindowPadding = ImVec2(4, 4);
 }
 
 void ImGui_Handler::Init()
@@ -110,7 +112,7 @@ void ImGui_Handler::Render()
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void ImGui_Handler::AddFrameStart(ImGuiFrameStartCB *cbf)
+void ImGui_Handler::AddFrameStart(void(*cbf)())
 {
-	this->frame_start_callbacks_.push_back(*cbf);
+	this->frame_start_callbacks_.push_back(cbf);
 }

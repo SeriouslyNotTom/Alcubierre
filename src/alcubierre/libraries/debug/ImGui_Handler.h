@@ -1,3 +1,5 @@
+#pragma once
+
 #include <alcubierre/libraries/render/RenderManager.h>
 #include <alcubierre/libraries/render/WindowManager.h>
 #include <GLFW/glfw3.h>
@@ -14,7 +16,7 @@ public:
 	void ApplyStyles();
 	void Init();
 	void Render();
-	const typedef std::function<void(void)> ImGuiFrameStartCB;
-	std::vector<ImGuiFrameStartCB> frame_start_callbacks_;
-	void AddFrameStart(ImGuiFrameStartCB *cbf);
+	const typedef void (*FrameStartCB)();
+	std::vector<void(*)()> frame_start_callbacks_;
+	void AddFrameStart(void(*cbf)());
 };
