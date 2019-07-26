@@ -1,7 +1,7 @@
 
 struct Video_Settings
 {
-	int ScalingFactor;
+	double ScalingFactor;
 	int Width;
 	int Height;
 };

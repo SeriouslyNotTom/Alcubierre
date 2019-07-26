@@ -7,8 +7,9 @@ class Console
 {
 	
 	std::vector<char*> lol;
-	char* inputbuff = new char[1024];
+	char* inputbuff;
 public:
+	bool ShouldDraw;
 	void Render();
 	void Init();
 };

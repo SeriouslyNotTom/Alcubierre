@@ -17,7 +17,7 @@ public:
 	std::vector<HintCallback> hint_callbacks_;
 	GLFWmonitor* glfw_monitor;
 	GLFWwindow* glfw_window;
-	int scaling_factor;
+	double scaling_factor;
 
 	void CenterWindow(GLFWmonitor *monitor);
 

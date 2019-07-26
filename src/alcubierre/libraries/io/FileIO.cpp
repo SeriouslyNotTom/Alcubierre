@@ -24,7 +24,7 @@ using namespace std;
 
 	char* FileIO::ReadEntireFile(char* file)
 	{
-		if (!CheckFileExists(file)) { fprintf(stderr, "ReadEntireFile could not find %s", file); throw exception("FILE NOT FOUND"); }
+		if (!CheckFileExists(file)) { fprintf(stderr, "ReadEntireFile could not find %s", file); }
 		ifstream fs(file);
 		fs.seekg(0, ios::end);
 		int size = fs.tellg();

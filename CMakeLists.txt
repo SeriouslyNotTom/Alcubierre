@@ -14,7 +14,10 @@ SET(GAME_STRING "Alcubierre")
 include_directories("lib")
 include_directories("src")
 include_directories("include")
+
 include_directories("lib/src/imgui")
+
+#include_directories("lib/src/tracy/profiler/libs/gl3w")
 
 file(GLOB imgui_src
 	lib/src/imgui/*.cpp

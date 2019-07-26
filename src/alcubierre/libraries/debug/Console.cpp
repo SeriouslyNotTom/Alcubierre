@@ -4,16 +4,27 @@
 
 void Console::Render()
 {
+	if (!ShouldDraw) return;
 	ImGui::SetNextWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
-	if (!ImGui::Begin("Console", NULL, ImGuiWindowFlags_NoCollapse))
+	if (!ImGui::Begin("Console", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_MenuBar))
 	{
 		ImGui::End();
 		return;
 	}
 
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			ImGui::Text("lol");
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+
 	const float footer_height_to_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing(); // 1 separator, 1 input text
-	ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.30f, 0.09f, 0.39f, 0.39f));
-	//ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(4,4));
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.30f, 0.09f, 0.39f, 0.39f));
+	//ImGui::PushStyleVar(ImGuiStyleVar_ChildBorderSize, 1.0f);
 	ImGui::BeginChild("ScrollingRegion", ImVec2(0, -footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar); // Leave room for 1 separator + 1 InputText
 	if (ImGui::BeginPopupContextWindow())
 	{
@@ -40,13 +51,13 @@ void Console::Render()
 	ImGui::PopStyleVar();
 	ImGui::EndChild();
 
+	ImGui::Separator();
 	// Command-line
 	bool reclaim_focus = false;
-	ImGui::PushItemWidth(ImGui::GetWindowWidth() - 50*2);
+	ImGui::PushItemWidth(ImGui::GetWindowWidth() - 10);
 	ImGui::InputText("", inputbuff, IM_ARRAYSIZE(inputbuff), ImGuiInputTextFlags_EnterReturnsTrue);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 40*2);
 	ImGui::AlignTextToFramePadding();
-	ImGui::Button("doit");
 	// Auto-focus on window apparition
 	ImGui::SetItemDefaultFocus();
 	if (reclaim_focus)
@@ -57,6 +68,7 @@ void Console::Render()
 
 void Console::Init()
 {
+	inputbuff = new char[1024];
 	lol.push_back("lol");
 	lol.push_back("more stuff");
 	memset(inputbuff, 0, sizeof(inputbuff));

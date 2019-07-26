@@ -7,10 +7,9 @@
     "\\src",
     "\\src\\alcubierre",
     "\\src\\alcubierre\\libraries",
-    "\\src\\alcubierre\\libraries\\debug",
-    "\\src\\alcubierre\\libraries\\io",
-    "\\src\\alcubierre\\libraries\\render"
+    "\\src\\alcubierre\\libraries\\image",
+    "\\src\\alcubierre\\libraries\\settings"
   ],
-  "SelectedNode": "\\lib\\src\\imgui\\imgui_impl_opengl3.cpp",
+  "SelectedNode": "\\src\\main.cpp",
   "PreviewInSolutionExplorer": false
 }
