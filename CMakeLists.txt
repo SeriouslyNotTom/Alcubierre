@@ -2,6 +2,7 @@
 project(alcubierre VERSION 0.1.0.0) # MAJOR.MINOR.PATCH.TWEAK
 
 #set(CMAKE_BUILD_TYPE Debug)
+string(TIMESTAMP PROJECT_BUILD_DATE "%Y-%m-%d")
 
 SET(VERSION_TYPE "IDB") # "(I)n (D)evelopment (B)uild"
 #SET(VERSION_TYPE "RCB") # "(R)elease (C)andidate (B)uild"

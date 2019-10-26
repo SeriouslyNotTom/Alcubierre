@@ -103,7 +103,7 @@ void windowCreation(Window* win)
 	win->requested_width_ = VideoSettings.Width;
 	win->requested_height_ = VideoSettings.Height;
 	win->glfw_monitor = NULL;
-	win->window_title_ = PROJECT_NAME_READABLE;
+	win->window_title_ = string(PROJECT_NAME_READABLE)+string(" | ")+string(PROJECT_BUILD_DATE);
 	win->scaling_factor = VideoSettings.ScalingFactor;
 
 	Logger::General(std::to_string(win->requested_width_).c_str());
@@ -148,6 +148,7 @@ int main(int argc, char *argv[])
 	if (glfwInit())
 	{
 		fprintf(stdout, "GLFW [%s] LOADED \n", glfwGetVersionString());
+		Logger::General(glfwGetVersionString());
 		glfwSetErrorCallback(error_callback);
 	}
 
@@ -166,6 +167,7 @@ int main(int argc, char *argv[])
 	glfwSetWindowIconifyCallback(window->glfw_window, window_iconify_callback);
 
 	glfwMakeContextCurrent(window->glfw_window);
+
 	
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -188,6 +190,7 @@ int main(int argc, char *argv[])
 
 	while (!glfwWindowShouldClose(window->glfw_window))
 	{
+		t1 = high_resolution_clock::now();
 		glfwPollEvents();
 		int display_w, display_h;
 		glfwGetFramebufferSize(window->glfw_window, &display_w, &display_h);
@@ -195,7 +198,7 @@ int main(int argc, char *argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0, 0, 0.3, 1);
 
-		t1 = high_resolution_clock::now();
+		
 		if (should_render_)
 		{
 			
@@ -208,9 +211,9 @@ int main(int argc, char *argv[])
 			renman.Render_HOOK();
 			
 		}
-		t2 = high_resolution_clock::now();
-		glfwSwapBuffers(window->glfw_window); 
 		
+		glfwSwapBuffers(window->glfw_window); 
+		t2 = high_resolution_clock::now();
 
 		update_stat++;
 		if(update_stat>10)

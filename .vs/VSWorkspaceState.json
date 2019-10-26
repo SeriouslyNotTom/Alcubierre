@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
     "",
+    "\\include",
+    "\\include\\IL",
     "\\lib",
     "\\lib\\src",
     "\\lib\\src\\imgui",
