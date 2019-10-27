@@ -7,6 +7,9 @@
 #define GLFW_INCLUDE_NONE
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 
+#include <alcubierre/Alcubierre.h>
+
+
 #include <iostream>
 #include <assert.h>
 #include <stdlib.h>
@@ -26,6 +29,7 @@
 #include <alcubierre/libraries/debug/ImGui_Handler.h>
 #include <alcubierre/libraries/settings/Settings.h>
 #include <alcubierre/libraries/debug/Console.h>
+
 
 
 using namespace std;
@@ -145,6 +149,9 @@ void Test01_Render()
 
 int main(int argc, char *argv[])
 {
+
+	Alcubierre::init(argc, argv);
+
 	if (glfwInit())
 	{
 		fprintf(stdout, "GLFW [%s] LOADED \n", glfwGetVersionString());

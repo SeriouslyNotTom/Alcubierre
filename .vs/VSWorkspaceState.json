@@ -1,17 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\include",
-    "\\include\\IL",
-    "\\lib",
-    "\\lib\\src",
-    "\\lib\\src\\imgui",
     "\\src",
     "\\src\\alcubierre",
+    "\\src\\alcubierre\\forensics",
     "\\src\\alcubierre\\libraries",
     "\\src\\alcubierre\\libraries\\image",
-    "\\src\\alcubierre\\libraries\\settings"
+    "\\src\\alcubierre\\libraries\\render",
+    "\\src\\cppc",
+    "\\src\\cppc\\game",
+    "\\src\\cppc\\render"
   ],
-  "SelectedNode": "\\src\\main.cpp",
+  "SelectedNode": "\\src\\alcubierre\\libraries\\render\\WindowManager.h",
   "PreviewInSolutionExplorer": false
 }
