@@ -7,9 +7,6 @@
 #define GLFW_INCLUDE_NONE
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 
-#include <alcubierre/Alcubierre.h>
-
-
 #include <iostream>
 #include <assert.h>
 #include <stdlib.h>
@@ -29,7 +26,7 @@
 #include <alcubierre/libraries/debug/ImGui_Handler.h>
 #include <alcubierre/libraries/settings/Settings.h>
 #include <alcubierre/libraries/debug/Console.h>
-
+#include <alcubierre/Alcubierre.h>
 
 
 using namespace std;
@@ -150,7 +147,7 @@ void Test01_Render()
 int main(int argc, char *argv[])
 {
 
-	Alcubierre::init(argc, argv);
+	
 
 	if (glfwInit())
 	{
@@ -174,6 +171,11 @@ int main(int argc, char *argv[])
 	glfwSetWindowIconifyCallback(window->glfw_window, window_iconify_callback);
 
 	glfwMakeContextCurrent(window->glfw_window);
+
+	Alcubierre::Init();
+	Alcubierre_Main my_main_man = Alcubierre_Main();
+
+	my_main_man.init(argc, argv);
 
 	
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

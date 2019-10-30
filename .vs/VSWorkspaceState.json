@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\alcubierre",
-    "\\src\\alcubierre\\forensics",
     "\\src\\alcubierre\\libraries",
-    "\\src\\alcubierre\\libraries\\image",
+    "\\src\\alcubierre\\libraries\\debug",
+    "\\src\\alcubierre\\libraries\\io",
     "\\src\\alcubierre\\libraries\\render",
+    "\\src\\alcubierre\\libraries\\settings",
     "\\src\\cppc",
-    "\\src\\cppc\\game",
     "\\src\\cppc\\render"
   ],
-  "SelectedNode": "\\src\\alcubierre\\libraries\\render\\WindowManager.h",
+  "SelectedNode": "\\CMakeLists.txt",
   "PreviewInSolutionExplorer": false
 }

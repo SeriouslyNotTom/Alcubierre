@@ -96,3 +96,9 @@ target_link_libraries(${PROJECT_NAME} "lz4")
 #target_include_directories("imgui" PRIVATE "${IMGUI_DIR}")
 #target_include_directories(${PROJECT_NAME} PRIVATE {"IMGUI_DIR"})
 #target_link_libraries(${PROJECT_NAME} "imgui")
+
+
+
+
+include_directories("${PROJECT_SOURCE_DIR}/lib/src/GameNetworkingSockets")
+add_subdirectory("${PROJECT_SOURCE_DIR}/lib/src/GameNetworkingSockets")

@@ -1,0 +1,14 @@
+option('light_tests',
+  type: 'boolean',
+  value: true,
+  description: 'Use smaller/shorter tests for simple integration testing (e.g. Travis)')
+
+option('Werror',
+  type: 'boolean',
+  value: false,
+  description: 'Enable -Werror flag when compiling')
+
+option('use_bcrypt',
+  type: 'boolean',
+  value: false,
+  description: 'Use BCrypt API for cryptography (encryption/decryption, hashing) on Windows')
