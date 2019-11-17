@@ -9,9 +9,14 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 .vs/Alcubierre
+.vs/Experiments
 output/debug
 output/install
-.exe
+*.exe
 src/config.h
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
+.DS_Store
+*.VC.db
+*.app
+*.a

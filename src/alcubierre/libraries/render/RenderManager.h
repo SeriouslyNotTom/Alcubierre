@@ -1,14 +1,14 @@
 #pragma once
 
-#include <alcubierre/libraries/render/WindowManager.h>
 #include <stdlib.h>
 #include <functional>
 #include <vector>
 
+#include <Alcubierre/Libraries/Render/Window/WindowManager.h>
+
 class Renderable
 {
 public:
-	//apparently i need a default definition for virtual functions
 	virtual void AcceptWindow(Window* window) {};
 	virtual void Init() {};
 	virtual void PreRender() {};
@@ -22,7 +22,7 @@ public:
 	void Add(Renderable* obj);
 	void Render_HOOK();
 	void Init();
-	Window* mywindow;
+	Window* myWindow;
 private:
 	std::vector<Renderable*> RenderOBJs_;
 	void DoRenders_();

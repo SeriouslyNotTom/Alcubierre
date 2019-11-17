@@ -1,14 +1,20 @@
-#pragma once
+#include <Alcubierre/Libraries/Debug/ImGui_handler.h>
 
-#include <alcubierre/libraries/debug/ImGui_Handler.h>
-#include <alcubierre/libraries/render/RenderManager.h>
-#include <alcubierre/libraries/render/WindowManager.h>
+#include <Alcubierre/Libraries/Render/RenderManager.h>
+#include <Alcubierre/Libraries/Render/Window/WindowManager.h>
+
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
 void ImGui_Handler::ImGui_Frame_Start()
 {
+
+	for (ImGui_Render* obj : this->ImGuiObjs)
+	{
+		obj->ImGuiFrameStart();
+	}
+
 	for (void(*cbf)() : frame_start_callbacks_)
 	{
 		cbf();
@@ -71,16 +77,11 @@ void ImGui_Handler::ApplyColors()
 	colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
 	colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
 	colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
-
-	
-	
-
-
 }
 
 void ImGui_Handler::ApplyStyles()
 {
-	ImGuiStyle *current_style = &ImGui::GetStyle();
+	ImGuiStyle* current_style = &ImGui::GetStyle();
 	current_style->FrameRounding = 0;
 	current_style->WindowRounding = 0;
 	current_style->TabRounding = 0;
@@ -89,7 +90,7 @@ void ImGui_Handler::ApplyStyles()
 	current_style->ChildBorderSize = 0;
 	current_style->FrameBorderSize = 0;
 	current_style->PopupBorderSize = 0;
-	current_style->WindowPadding = ImVec2(4*window_->scaling_factor, 4*window_->scaling_factor);
+	current_style->WindowPadding = ImVec2(4 * window_->scaling_factor, 4 * window_->scaling_factor);
 }
 
 void ImGui_Handler::Init()
@@ -110,14 +111,19 @@ void ImGui_Handler::Render()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-	
+
 	this->ImGui_Frame_Start();
 
-	ImGui::Render();	
+	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void ImGui_Handler::AddFrameStart(void(*cbf)())
 {
 	this->frame_start_callbacks_.push_back(cbf);
+}
+
+void ImGui_Handler::AddImGuiRenderableOBJ(ImGui_Render* obj)
+{
+	this->ImGuiObjs.push_back(obj);
 }

@@ -4,3 +4,12 @@
 #pragma once
 
 #include <iostream>
+#include <Alcubierre/Tests/TestProgram_handler.h>
+#include <Alcubierre/Libraries/Debug/Metrics.h>
+
+class Alcubierre
+{
+public:
+	static TestProgram_handler Test_Programs;
+	static Debug_Metrics DebugMetrics;
+};

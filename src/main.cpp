@@ -1,235 +1,139 @@
-﻿#pragma once
-
-#ifdef _WIN32
-#define APIENTRY __stdcall
-#endif
-
 #define GLFW_INCLUDE_NONE
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
-
-#include <iostream>
-#include <assert.h>
+#include <main.h>
 #include <stdlib.h>
-#include <string>
-#include <ctime>
-#include <chrono>
+#include <iostream>
 
+#include <config.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 
-#include <config.h>
-#include <alcubierre/forensics/Logging.h>
-#include <alcubierre/forensics/Debug.cpp>
-#include <alcubierre/libraries/render/WindowManager.h>
-#include <alcubierre/libraries/render/RenderManager.h>
-#include <alcubierre/libraries/debug/ImGui_Handler.h>
-#include <alcubierre/libraries/settings/Settings.h>
-#include <alcubierre/libraries/debug/Console.h>
-#include <alcubierre/Alcubierre.h>
+#include <Alcubierre/Libraries/Render/RenderManager.h>
+#include <Alcubierre/Libraries/Render/Window/WindowManager.h>
+#include <Alcubierre/Libraries/Debug/ImGui_handler.h>
+#include <Alcubierre/Libraries/Utilities/color.h>
+#include <Alcubierre/Libraries/Debug/Debug_interface.h>
+#include <Alcubierre/Tests/TestProgram_handler.h>
+#include <Alcubierre/Tests/Demos.cpp>
+#include <Alcubierre/Libraries/Debug/Metrics.h>
 
 
 using namespace std;
-using namespace std::chrono;
 
-bool should_render_ = true;
+typedef void(*FPTR)();
 
 void error_callback(int error, const char* description)
 {
-	fprintf(stderr, "Error Code: %i ; %s\n", description);
+	fprintf(stderr, "GLFW3 Error Code: %i ; %s\n", error, description);
 }
 
-void window_iconify_callback(GLFWwindow* window, int iconified)
+
+
+void CreateWindow_Callback(Window* window)
 {
-	if (iconified)
-	{
-		should_render_ = false;
-	}
-	else {
-		should_render_ = true;
-	}
+	window->requested_width_ = 1600;
+	window->requested_height_ = 900;
+	window->glfw_monitor = NULL;
+	window->window_title_ = string("Alcubierre");
+	window->scaling_factor = 1;
+#ifdef __APPLE__
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#endif // __APPLE__
 }
 
-Video_Settings VideoSettings;
-Console* con;
-bool Enable_Test01;
-bool Init_Test01 = false;
-bool ShowMetrics = true;
-bool ShowImGUiDemo = false;
-bool thing = true;
-bool vsync = false;
-bool vsync_applied = false;
-
-
-high_resolution_clock::time_point t1, t2;
-duration<double> render_time;
-int update_stat = 0;
-
-
-
-void ImGui_Callback()
+class fuckyinterface : public ImGui_Render
 {
-	ImGui::BeginMainMenuBar();
-	if (ImGui::BeginMenu("Debug"))
+	void ImGuiFrameStart()
 	{
-		ImGui::Checkbox("Console", &con->ShouldDraw);
-		ImGui::Checkbox("Metrics", &ShowMetrics);
-		ImGui::Checkbox("ImGui Demo", &ShowImGUiDemo);
-		ImGui::EndMenu();
-	}	
-	if (ImGui::BeginMenu("Tests"))
-	{
-		ImGui::Checkbox("Test01", &Enable_Test01);
-		ImGui::EndMenu();
+		Debug_Interface::ImGuiFrameStart();
 	}
-	if (ImGui::BeginMenu("Video"))
-	{
-		ImGui::Checkbox("VSYNC", &vsync);
-		ImGui::EndMenu();
-	}
-	ImGui::EndMainMenuBar();
-
-	con->Render();
-	if (ShowMetrics) { ImGui::ShowMetricsWindow(&ShowMetrics); }
-	if (ShowImGUiDemo) { ImGui::ShowDemoWindow(&ShowImGUiDemo); }
-
-	ImGui::Begin("MS WINDOW");
-	ImGui::Text(to_string((render_time.count() * 1000)).c_str());
-	ImGui::End();
-
-}
-
-void windowCreation(Window* win)
-{
-	win->requested_width_ = VideoSettings.Width;
-	win->requested_height_ = VideoSettings.Height;
-	win->glfw_monitor = NULL;
-	win->window_title_ = string(PROJECT_NAME_READABLE)+string(" | ")+string(PROJECT_BUILD_DATE);
-	win->scaling_factor = VideoSettings.ScalingFactor;
-
-	Logger::General(std::to_string(win->requested_width_).c_str());
-}
-
-float counter = -1.0f;
-
-GLuint VAO1;
-GLfloat vbd[] =
-{
-	-1.0f, -1.0f, 0.0f,
-	1.0f, -1.0f, 0.0f,
-	0.0f,  1.0f, 0.0f,
 };
-GLuint vrtbuf;
 
-void Test01_Init()
-{
-	glGenVertexArrays(1, &VAO1);
-	glBindVertexArray(VAO1);
-	
-	glGenBuffers(1, &vrtbuf);
-	glBindBuffer(GL_ARRAY_BUFFER, vrtbuf);
-	
-}
-
-void Test01_Render()
-{
-	vbd[7] = counter;
-	if (counter >= 1.0f) { counter = -1.0f; }
-	counter = counter + 0.005f;
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vbd), &vbd, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vrtbuf);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glDisableVertexAttribArray(0);
-}
+TestProgram_handler Alcubierre::Test_Programs = TestProgram_handler();
+Demos Demo_Programs = Demos();
+Debug_Metrics Alcubierre::DebugMetrics = Debug_Metrics();
 
 int main(int argc, char *argv[])
 {
+	fprintf(stdout,"%s (%s) [%s %s] %s\n",PROJECT_NAME_READABLE, PROJECT_OS, PROJECT_VER, PROJECT_VER_TYPE, PROJECT_BUILD_DATE);
+	fprintf(stdout, "GLFW %s\n",glfwGetVersionString());
 
+	glfwSetErrorCallback(&error_callback);
 	
+	if(!glfwInit())
+		return -1;
 
-	if (glfwInit())
-	{
-		fprintf(stdout, "GLFW [%s] LOADED \n", glfwGetVersionString());
-		Logger::General(glfwGetVersionString());
-		glfwSetErrorCallback(error_callback);
-	}
+	WindowManager::WindowCreationCallback Window_Created_CB = static_cast<WindowManager::WindowCreationCallback>(&CreateWindow_Callback);
+	Window* window = WindowManager::newWindow(&Window_Created_CB);
+	Alcubierre::DebugMetrics.GLFW3_DONE(window);
+	GLFWmonitor* primary_monitor = glfwGetPrimaryMonitor();
+	window->CenterWindow(primary_monitor);
 
-	char* settings_file = new char[200];
-	strcpy(settings_file, getenv("APPDATA"));
-	strcat(settings_file, "\\Alcubierre\\settings.json");
-	VideoSettings = Settings::LoadSettings(settings_file);
+	RenderManager renderMan = RenderManager();
+	renderMan.myWindow = window;
 
-	WindowManager winman = WindowManager();
-	Logger::Raw(__FUNCTION__);
-	WindowManager::WindowCreationCallback thing = static_cast<WindowManager::WindowCreationCallback>(&windowCreation);
-	Window* window = winman.newWindow(&thing);
-	GLFWmonitor *primary = glfwGetPrimaryMonitor();
-	window->CenterWindow(primary);
+	ImGui_Handler dearImGui = ImGui_Handler();
+	fuckyinterface fckint = fuckyinterface();
+	dearImGui.AddImGuiRenderableOBJ(&fckint);
 	
-	glfwSetWindowIconifyCallback(window->glfw_window, window_iconify_callback);
+	
+	dearImGui.AddImGuiRenderableOBJ(&Alcubierre::Test_Programs);
+	Debug_Interface::AddDebugMenuHook(&Alcubierre::Test_Programs);
+	renderMan.Add(&Alcubierre::Test_Programs);
+	renderMan.Add(&dearImGui);
+	float xscale, yscale;
+	std::string monitor_name;
+	monitor_name = glfwGetMonitorName(window->glfw_monitor);
+	glfwGetWindowContentScale(window->glfw_window, &xscale, &yscale);
+	fprintf(stdout, "Content scale for monitor: %s is x : %f and y : %f\n", monitor_name, xscale, yscale);
+	
 
 	glfwMakeContextCurrent(window->glfw_window);
 
-	Alcubierre::Init();
-	Alcubierre_Main my_main_man = Alcubierre_Main();
-
-	my_main_man.init(argc, argv);
-
-	
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		
+
 		std::cout << "Failed to initialize OpenGL context" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
-	con = new Console();
-	con->Init();
+	const char* GLVer = (char*)glGetString(GL_VERSION);
+	const char* GLRenderer = (char*)glGetString(GL_RENDERER);
+	fprintf(stdout, "OPENGL %s %s\n", GLVer, GLRenderer);
+	
+	Alcubierre::DebugMetrics.GPU_NAME = GLRenderer;
+	Alcubierre::DebugMetrics.OPENGL_VER = GLVer;
+	Demo_Programs.LoadTestPrograms();
 
-	RenderManager renman;
-	renman.mywindow = window;
-	ImGui_Handler dear = ImGui_Handler();
-	dear.AddFrameStart(*ImGui_Callback);
-	renman.Add(&dear);
-	renman.Init();
+	renderMan.Init();
+	glfwSwapInterval(1);
 
-	glfwSwapInterval(0);
+	RGBA bg_col = Colors::To_Normalized(Colors::JAPANESE_INDIGO);
 
-	while (!glfwWindowShouldClose(window->glfw_window))
+	while(!glfwWindowShouldClose(window->glfw_window))
 	{
-		t1 = high_resolution_clock::now();
+		
+		glClear(GL_COLOR_BUFFER_BIT);
+		
 		glfwPollEvents();
 		int display_w, display_h;
 		glfwGetFramebufferSize(window->glfw_window, &display_w, &display_h);
 		glViewport(0, 0, display_w, display_h);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0, 0, 0.3, 1);
+		glClearColor(bg_col.R,bg_col.G,bg_col.B,bg_col.A);
+		
+		renderMan.Render_HOOK();
 
-		
-		if (should_render_)
-		{
-			
-			if (Enable_Test01) {
-				if (Init_Test01 == true) { Test01_Render(); }
-				else { Test01_Init(); Init_Test01 = true; }
-			}
-			
-			
-			renman.Render_HOOK();
-			
-		}
-		
-		glfwSwapBuffers(window->glfw_window); 
-		t2 = high_resolution_clock::now();
-
-		update_stat++;
-		if(update_stat>10)
-		{ 
-			render_time = duration_cast<duration<double>>(t2 - t1);
-			update_stat = 0;
-		}
-		
+		glfwSwapBuffers(window->glfw_window);
+		glfwPollEvents();
 	}
+
+	glfwTerminate();
+	return 0;
+
 }
+

@@ -1,16 +1,18 @@
 {
   "ExpandedNodes": [
     "",
+    "\\lib",
+    "\\lib\\src",
+    "\\lib\\src\\imgui",
     "\\src",
-    "\\src\\alcubierre",
-    "\\src\\alcubierre\\libraries",
-    "\\src\\alcubierre\\libraries\\debug",
-    "\\src\\alcubierre\\libraries\\io",
-    "\\src\\alcubierre\\libraries\\render",
-    "\\src\\alcubierre\\libraries\\settings",
-    "\\src\\cppc",
-    "\\src\\cppc\\render"
+    "\\src\\Alcubierre",
+    "\\src\\Alcubierre\\Libraries",
+    "\\src\\Alcubierre\\Libraries\\Debug",
+    "\\src\\Alcubierre\\Libraries\\Debug\\Metrics",
+    "\\src\\Alcubierre\\Libraries\\Render",
+    "\\src\\Alcubierre\\Tests",
+    "\\toolchains"
   ],
-  "SelectedNode": "\\CMakeLists.txt",
+  "SelectedNode": "\\src\\main.cpp",
   "PreviewInSolutionExplorer": false
 }

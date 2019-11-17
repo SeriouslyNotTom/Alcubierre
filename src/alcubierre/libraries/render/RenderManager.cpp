@@ -1,5 +1,4 @@
-#include <alcubierre/libraries/render/RenderManager.h>
-#include <alcubierre/forensics/Logging.h>
+#include <Alcubierre/Libraries/Render/RenderManager.h>
 
 void RenderManager::Add(Renderable* obj)
 {
@@ -8,16 +7,16 @@ void RenderManager::Add(Renderable* obj)
 
 void RenderManager::DoRenders_()
 {
-	for (Renderable* & OBJ : RenderOBJs_) {
+	for (Renderable*& OBJ : RenderOBJs_) {
 		OBJ->Render();
 	}
 }
 
 void RenderManager::Init()
 {
-	for (Renderable* & OBJ : RenderOBJs_)
+	for (Renderable*& OBJ : RenderOBJs_)
 	{
-		OBJ->AcceptWindow(mywindow);
+		OBJ->AcceptWindow(myWindow);
 		OBJ->Init();
 	}
 }
