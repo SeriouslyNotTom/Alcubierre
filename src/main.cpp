@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 
+#include <Alcubierre/Libraries/Utilities/lodepng.h>
 #include <Alcubierre/Libraries/Render/RenderManager.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 #include <Alcubierre/Libraries/Debug/ImGui_handler.h>
@@ -17,6 +18,8 @@
 #include <Alcubierre/Tests/TestProgram_handler.h>
 #include <Alcubierre/Tests/Demos.cpp>
 #include <Alcubierre/Libraries/Debug/Metrics.h>
+#include <Alcubierre/Libraries/Utilities/file.h>
+#include <Alcubierre/Libraries/Render/Shader.h>
 
 
 using namespace std;
@@ -28,14 +31,12 @@ void error_callback(int error, const char* description)
 	fprintf(stderr, "GLFW3 Error Code: %i ; %s\n", error, description);
 }
 
-
-
 void CreateWindow_Callback(Window* window)
 {
 	window->requested_width_ = 1600;
 	window->requested_height_ = 900;
 	window->glfw_monitor = NULL;
-	window->window_title_ = string("Alcubierre");
+	window->window_title_ = string(PROJECT_NAME_READABLE);
 	window->scaling_factor = 1;
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -56,6 +57,7 @@ class fuckyinterface : public ImGui_Render
 TestProgram_handler Alcubierre::Test_Programs = TestProgram_handler();
 Demos Demo_Programs = Demos();
 Debug_Metrics Alcubierre::DebugMetrics = Debug_Metrics();
+RenderManager Alcubierre::Render_Manager = RenderManager();
 
 int main(int argc, char *argv[])
 {
@@ -67,31 +69,29 @@ int main(int argc, char *argv[])
 	if(!glfwInit())
 		return -1;
 
+	char* testimage = util_file::LoadFile_ifstream("C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico.png");
+
 	WindowManager::WindowCreationCallback Window_Created_CB = static_cast<WindowManager::WindowCreationCallback>(&CreateWindow_Callback);
 	Window* window = WindowManager::newWindow(&Window_Created_CB);
 	Alcubierre::DebugMetrics.GLFW3_DONE(window);
 	GLFWmonitor* primary_monitor = glfwGetPrimaryMonitor();
 	window->CenterWindow(primary_monitor);
 
-	RenderManager renderMan = RenderManager();
-	renderMan.myWindow = window;
+	Alcubierre::Render_Manager.myWindow = window;
 
 	ImGui_Handler dearImGui = ImGui_Handler();
 	fuckyinterface fckint = fuckyinterface();
 	dearImGui.AddImGuiRenderableOBJ(&fckint);
-	
-	
 	dearImGui.AddImGuiRenderableOBJ(&Alcubierre::Test_Programs);
 	Debug_Interface::AddDebugMenuHook(&Alcubierre::Test_Programs);
-	renderMan.Add(&Alcubierre::Test_Programs);
-	renderMan.Add(&dearImGui);
+	Alcubierre::Render_Manager.Add(&Alcubierre::Test_Programs);
+	Alcubierre::Render_Manager.Add(&dearImGui);
 	float xscale, yscale;
 	std::string monitor_name;
 	monitor_name = glfwGetMonitorName(window->glfw_monitor);
 	glfwGetWindowContentScale(window->glfw_window, &xscale, &yscale);
-	fprintf(stdout, "Content scale for monitor: %s is x : %f and y : %f\n", monitor_name, xscale, yscale);
+	fprintf(stdout, "Content scale for monitor: %s is x : %f and y : %f\n", monitor_name.c_str(), xscale, yscale);
 	
-
 	glfwMakeContextCurrent(window->glfw_window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -109,10 +109,12 @@ int main(int argc, char *argv[])
 	Alcubierre::DebugMetrics.OPENGL_VER = GLVer;
 	Demo_Programs.LoadTestPrograms();
 
-	renderMan.Init();
+	Alcubierre::Render_Manager.Init();
 	glfwSwapInterval(1);
 
 	RGBA bg_col = Colors::To_Normalized(Colors::JAPANESE_INDIGO);
+	
+	Alcubierre::Render_Manager.AddShader(string("Standard"),"C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\standard.vshad","C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\standard.fshad");
 
 	while(!glfwWindowShouldClose(window->glfw_window))
 	{
@@ -126,7 +128,7 @@ int main(int argc, char *argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(bg_col.R,bg_col.G,bg_col.B,bg_col.A);
 		
-		renderMan.Render_HOOK();
+		Alcubierre::Render_Manager.Render_HOOK();
 
 		glfwSwapBuffers(window->glfw_window);
 		glfwPollEvents();

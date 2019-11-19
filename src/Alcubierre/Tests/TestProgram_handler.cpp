@@ -29,7 +29,6 @@ void TestProgram_handler::TestMenuStart()
 void TestProgram_handler::Init()
 {
 	this->EnabledStatus = std::unordered_map<Test_Program*, bool*>();
-	fprintf(stdout, "fluff");
 	//debug here, disapears here
 	for each (Test_Program* obj in TestPrograms_)
 	{

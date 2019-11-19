@@ -12,4 +12,5 @@ class Alcubierre
 public:
 	static TestProgram_handler Test_Programs;
 	static Debug_Metrics DebugMetrics;
+	static RenderManager Render_Manager;
 };

@@ -1,5 +1,5 @@
 #pragma once
-
+#define GLFW_INCLUDE_NONE
 #include <Alcubierre/Tests/TestProgram_handler.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -17,14 +17,23 @@ private:
 	float yPos = 0.0;
 
 	float verts[9] = { -0.5f, -0.5f, 0.0f, 0.0f, 0.5f, 0.0f, 0.5f, -0.5f, 0.0f };
+	float color[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
 	unsigned int VBO, VAO;
 
 	double timeStart, timeEnd;
+
+	GLint shader, shad_col;
+
 
 	void init()
 	{
 		if (!initDone)
 		{
+
+			shader = Alcubierre::Render_Manager.shaders[string("Standard")];
+			glUseProgram(shader);
+			shad_col = glGetUniformLocation(shader, "aColor");
 			glGenBuffers(1, &VBO);
 			glGenVertexArrays(1, &VAO);
 			glBindVertexArray(VAO);
@@ -42,19 +51,24 @@ public:
 
 	void performRender()
 	{
-		if (initDone & Enabled)
+		if (Enabled)
 		{
-			glBindVertexArray(VAO);
-			verts[0] = xPos + -0.5F;
-			verts[1] = yPos + -0.5F;
-			verts[3] = xPos;
-			verts[4] = yPos + 0.5f;
-			verts[6] = xPos + 0.5f;
-			verts[7] = yPos + -0.5f;
-			glBufferData(GL_ARRAY_BUFFER, sizeof(verts), &verts, GL_STATIC_DRAW);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			if (initDone)
+			{
+				glUseProgram(shader);
+				glBindVertexArray(VAO);
+				verts[0] = xPos + -0.5F;
+				verts[1] = yPos + -0.5F;
+				verts[3] = xPos;
+				verts[4] = yPos + 0.5f;
+				verts[6] = xPos + 0.5f;
+				verts[7] = yPos + -0.5f;
+				glUniform4fv(shad_col, 1, color);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(verts), &verts, GL_STATIC_DRAW);
+				glDrawArrays(GL_TRIANGLES, 0, 3);
+			}
+			else { init(); }
 		}
-		else { init(); }
 	}
 
 	void ImGuiFrameStart()
@@ -63,9 +77,11 @@ public:
 		{
 			if (ImGui::Begin("[Test1] Debug",&Enabled))
 			{
-				//ImGui::Text("Test 1 took %d ms", (float)(timeEnd - timeStart));
 				ImGui::SliderFloat("xPos", &xPos, -1, 1);
 				ImGui::SliderFloat("yPos", &yPos, -1, 1);
+
+				ImGui::ColorEdit4("Color", color);
+
 				ImGui::End();
 			}
 		}

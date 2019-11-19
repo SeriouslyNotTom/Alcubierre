@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <functional>
 #include <vector>
-
+#include <unordered_map>
+#include <glad/glad.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 
 class Renderable
@@ -23,6 +24,9 @@ public:
 	void Render_HOOK();
 	void Init();
 	Window* myWindow;
+	std::unordered_map<std::string, GLuint> shaders;
+	void AddShader(std::string name, char* vertex_path, char* fragment_path);
+
 private:
 	std::vector<Renderable*> RenderOBJs_;
 	void DoRenders_();
