@@ -9,6 +9,11 @@
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <Alcubierre/Libraries/Utilities/lodepng.h>
 #include <Alcubierre/Libraries/Render/RenderManager.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
@@ -23,6 +28,7 @@
 
 
 using namespace std;
+using namespace glm;
 
 typedef void(*FPTR)();
 
@@ -69,13 +75,39 @@ int main(int argc, char *argv[])
 	if(!glfwInit())
 		return -1;
 
-	char* testimage = util_file::LoadFile_ifstream("C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico.png");
+	//char* testimage = util_file::LoadFile_ifstream("C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico.png");
+	std::vector<unsigned char> data;
+	std::vector<unsigned char> image_large;
+	std::vector<unsigned char> image_smol;
+
+	lodepng::load_file(data, "C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico.png");
+	unsigned width_large, height_large;
+	lodepng::decode(image_large, width_large, height_large, data);
+	unsigned width_smol, height_smol;
+	data.clear();
+	lodepng::load_file(data, "C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico_smol.png");
+	lodepng::decode(image_smol, width_smol, height_smol, data);
+	data.clear();
+
+	GLFWimage icons[2];
+	
+	icons[0].height = height_large;
+	icons[0].width = width_large;
+	icons[0].pixels = image_large.data();
+
+	icons[1].height = height_smol;
+	icons[1].width = width_smol;
+	icons[1].pixels = image_smol.data();
+	//image.clear();
+	
 
 	WindowManager::WindowCreationCallback Window_Created_CB = static_cast<WindowManager::WindowCreationCallback>(&CreateWindow_Callback);
 	Window* window = WindowManager::newWindow(&Window_Created_CB);
 	Alcubierre::DebugMetrics.GLFW3_DONE(window);
 	GLFWmonitor* primary_monitor = glfwGetPrimaryMonitor();
 	window->CenterWindow(primary_monitor);
+
+	glfwSetWindowIcon(window->glfw_window, 2, icons);
 
 	Alcubierre::Render_Manager.myWindow = window;
 
@@ -84,8 +116,9 @@ int main(int argc, char *argv[])
 	dearImGui.AddImGuiRenderableOBJ(&fckint);
 	dearImGui.AddImGuiRenderableOBJ(&Alcubierre::Test_Programs);
 	Debug_Interface::AddDebugMenuHook(&Alcubierre::Test_Programs);
-	Alcubierre::Render_Manager.Add(&Alcubierre::Test_Programs);
 	Alcubierre::Render_Manager.Add(&dearImGui);
+	Alcubierre::Render_Manager.Add(&Alcubierre::Test_Programs);
+	
 	float xscale, yscale;
 	std::string monitor_name;
 	monitor_name = glfwGetMonitorName(window->glfw_monitor);
@@ -120,6 +153,8 @@ int main(int argc, char *argv[])
 	{
 		
 		glClear(GL_COLOR_BUFFER_BIT);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
 		glfwPollEvents();
 		int display_w, display_h;

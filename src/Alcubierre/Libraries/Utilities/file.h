@@ -10,22 +10,18 @@ class util_file
 public:
 	static char* LoadFile_ifstream(const char* file_path)
 	{
-		std::ifstream FileStream;
-		int fsize;
-		FileStream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		try
 		{
-			FileStream.open(file_path);
-			FileStream.seekg(0,FileStream.end);
-			fsize = FileStream.tellg();
-			FileStream.seekg(0, FileStream.beg);
-			std::stringstream buffer;
-			buffer << FileStream.rdbuf();
-			std::string data = buffer.str();
-			char* output = strdup(data.c_str());
-			FileStream.close();
-			fprintf(stdout, "\x1B[36m-------------------------------\n%s\n%s\n-------------------------------\n\033[0m", file_path, output);
-			return output;
+			std::ifstream FileStream(file_path, std::ios_base::binary);
+			FileStream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+			FileStream.seekg(0,std::ios::end);
+			int fsize = FileStream.tellg();
+			FileStream.seekg(0, std::ios::beg);
+			char* buffer = new char[fsize];
+			buffer[fsize] = '\0';
+			FileStream.read(buffer, fsize);
+			fprintf(stdout, "\x1B[36m-------------------------------\n%s\n%s\n-------------------------------\n\033[0m", file_path, buffer);
+			return buffer;
 		}
 		catch (std::ifstream::failure e)
 		{
