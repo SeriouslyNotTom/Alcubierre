@@ -1,6 +1,7 @@
 #include <Alcubierre/Libraries/Debug/Debug_interface.h>
 #include <imgui.h>
 #include <main.h>
+#include <Alcubierre/Libraries/Utilities/convert.h>
 
 bool Debug_Interface::showDemo = false;;
 bool Debug_Interface::Test1 = false;
@@ -31,6 +32,7 @@ void Debug_Interface::Render()
 		ImGui::Text("Monitor Scale: %f", Alcubierre::DebugMetrics.Monitor_Scale);
 		ImGui::Text("GL_RENDERER : %s", Alcubierre::DebugMetrics.GPU_NAME);
 		ImGui::Text("GL_VERSION : %s", Alcubierre::DebugMetrics.OPENGL_VER);
+		ImGui::Text("Memory Usage : %s", util_convert::format_size(Alcubierre::DebugMetrics.getMemoryUsage()).c_str());
 		ImGui::End();
 	}
 

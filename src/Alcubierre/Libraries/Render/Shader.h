@@ -32,8 +32,8 @@ public:
 
 	static GLuint CompileShader(char* vert_shad_path, char* frag_shad_path)
 	{
-		const char* vert_shad_code = util_file::LoadFile_ifstream(vert_shad_path);
-		const char* frag_shad_code = util_file::LoadFile_ifstream(frag_shad_path);
+		const char* vert_shad_code = util_file::LoadFile_memorymap(vert_shad_path);
+		const char* frag_shad_code = util_file::LoadFile_memorymap(frag_shad_path);
 
 		GLuint vert_shad_id, frag_shad_id, shad_id;
 

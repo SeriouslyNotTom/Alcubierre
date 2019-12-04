@@ -14,4 +14,6 @@ public:
 	const char* GLFW_NAME = "666";
 	const char* OPENGL_VER = "666";
 	void GLFW3_DONE(Window* window);
+
+	int getMemoryUsage();
 };

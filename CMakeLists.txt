@@ -74,6 +74,10 @@ target_include_directories("imgui" PRIVATE ${IMGUI_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${IMGUI_DIR})
 target_link_libraries(${PROJECT_NAME} "imgui")
 
+#mandreyel/mio
+add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/mio)
+target_link_libraries(${PROJECT_NAME} mio)
+
 #i'm sure there is a better way to do this but i cannot be fucked
 #for some reason glfw3 wants to compile everything including macos and linux stuff even when being built from win32
 add_definitions(-DGLFW_INCLUDE_NONE)

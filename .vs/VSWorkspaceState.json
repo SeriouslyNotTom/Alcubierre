@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\include",
-    "\\include\\glm",
+    "\\lib",
+    "\\lib\\src",
+    "\\lib\\src\\imgui",
     "\\src",
     "\\src\\Alcubierre",
     "\\src\\Alcubierre\\Libraries",
-    "\\src\\Alcubierre\\Libraries\\Render",
     "\\src\\Alcubierre\\Libraries\\Utilities",
     "\\src\\Alcubierre\\Tests",
     "\\toolchains"
   ],
-  "SelectedNode": "\\include\\glm\\matrix.hpp",
+  "SelectedNode": "\\src\\Alcubierre\\Libraries\\Debug\\ImGui_Handler.cpp",
   "PreviewInSolutionExplorer": false
 }
