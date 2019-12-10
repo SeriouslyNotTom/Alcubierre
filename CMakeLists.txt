@@ -78,7 +78,6 @@ target_link_libraries(${PROJECT_NAME} "imgui")
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/mio)
 target_link_libraries(${PROJECT_NAME} mio)
 
-#i'm sure there is a better way to do this but i cannot be fucked
 #for some reason glfw3 wants to compile everything including macos and linux stuff even when being built from win32
 add_definitions(-DGLFW_INCLUDE_NONE)
 if(UNIX OR SYNTHETIC)
@@ -88,6 +87,7 @@ if(UNIX OR SYNTHETIC)
 
 	add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/glfw-3.3)
 	target_link_libraries(${PROJECT_NAME} glfw)
+	#i'm sure there is a better way to do this but i cannot be fucked
 	set(CMAKE_C_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
 	set(CMAKE_CXX_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
 endif(UNIX)

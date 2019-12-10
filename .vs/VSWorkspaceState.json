@@ -3,14 +3,15 @@
     "",
     "\\lib",
     "\\lib\\src",
-    "\\lib\\src\\imgui",
     "\\src",
     "\\src\\Alcubierre",
     "\\src\\Alcubierre\\Libraries",
+    "\\src\\Alcubierre\\Libraries\\Debug",
+    "\\src\\Alcubierre\\Libraries\\Render",
     "\\src\\Alcubierre\\Libraries\\Utilities",
     "\\src\\Alcubierre\\Tests",
     "\\toolchains"
   ],
-  "SelectedNode": "\\src\\Alcubierre\\Libraries\\Debug\\ImGui_Handler.cpp",
+  "SelectedNode": "\\src\\main.cpp",
   "PreviewInSolutionExplorer": false
 }

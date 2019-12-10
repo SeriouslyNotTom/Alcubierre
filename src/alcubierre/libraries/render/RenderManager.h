@@ -17,7 +17,7 @@ public:
 	virtual void PostRender() {};
 };
 
-class RenderManager
+class Render_Manager
 {
 public:
 	void Add(Renderable* obj);

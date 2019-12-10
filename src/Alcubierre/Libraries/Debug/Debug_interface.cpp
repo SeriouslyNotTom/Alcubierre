@@ -1,6 +1,6 @@
 #include <Alcubierre/Libraries/Debug/Debug_interface.h>
 #include <imgui.h>
-#include <main.h>
+#include <Alcubierre/Alcubierre.h>
 #include <Alcubierre/Libraries/Utilities/convert.h>
 
 bool Debug_Interface::showDemo = false;;
