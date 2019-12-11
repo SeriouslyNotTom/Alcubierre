@@ -71,17 +71,11 @@ int main(int argc, char *argv[])
 	fprintf(stdout,"%s (%s) [%s %s] %s\n",PROJECT_NAME_READABLE, PROJECT_OS, PROJECT_VER, PROJECT_VER_TYPE, PROJECT_BUILD_DATE);
 	fprintf(stdout, "GLFW %s\n",glfwGetVersionString());
 
-	fprintf(stdout, "START LOAD\n");
-	//char* test_file = util_file::LoadFile_memorymap("C:\\Users\\tom\\Desktop\\alcubierre-test\\kicad-5.1.2_2-x86_64.exe");
-	std::string fuck = util_convert::format_size(Alcubierre::DebugMetrics.getMemoryUsage());
-	
-
 	glfwSetErrorCallback(&error_callback);
 	
 	if(!glfwInit())
 		return -1;
 
-	//char* testimage = util_file::LoadFile_ifstream("C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico.png");
 	std::vector<unsigned char> data;
 	std::vector<unsigned char> image_large;
 	std::vector<unsigned char> image_smol;
@@ -104,7 +98,6 @@ int main(int argc, char *argv[])
 	icons[1].height = height_smol;
 	icons[1].width = width_smol;
 	icons[1].pixels = image_smol.data();
-	//image.clear();
 
 	WindowManager::WindowCreationCallback Window_Created_CB = static_cast<WindowManager::WindowCreationCallback>(&CreateWindow_Callback);
 	Window* window = WindowManager::newWindow(&Window_Created_CB);
@@ -159,7 +152,6 @@ int main(int argc, char *argv[])
 	while(!glfwWindowShouldClose(window->glfw_window))
 	{
 		
-		//glClear(GL_COLOR_BUFFER_BIT);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
