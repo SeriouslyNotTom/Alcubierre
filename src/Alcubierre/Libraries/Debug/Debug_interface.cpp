@@ -17,9 +17,9 @@ void Debug_Interface::ImGuiFrameStart()
 	Render();
 }
 
-void Debug_Interface::AddDebugMenuHook(Debug_Menu* obj)
+void Debug_Interface::AddDebugMenuHook(Debug_Menu* new_obj)
 {
-	menu_objs.push_back(obj);
+	menu_objs.push_back(new_obj);
 }
 
 void Debug_Interface::Render()
@@ -50,15 +50,15 @@ void Debug_Interface::Render()
 	if (ImGui::BeginMenu("Debug"))
 	{
 		ImGui::Checkbox("DearImGui Demo Program", &Debug_Interface::showDemo);
-		for each (Debug_Menu* obj in menu_objs)
+		for (int k=0;k<=menu_objs.size();k++)
 		{
-			obj->DebugMenuStart();
+			menu_objs[k]->DebugMenuStart();
 		}
 		if (ImGui::BeginMenu("Tests"))
 		{
-			for each (Debug_Menu* obj in menu_objs)
+			for (int i=0;i<=menu_objs.size();i++)
 			{
-				obj->TestMenuStart();
+				menu_objs[i]->TestMenuStart();
 			}
 			ImGui::EndMenu();
 		}

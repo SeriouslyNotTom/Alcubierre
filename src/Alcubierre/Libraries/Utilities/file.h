@@ -9,12 +9,12 @@
 #include <mio/mmap.hpp>
 #include <algorithm>
 #include <fcntl.h>
-#include <io.h>
+//#include <io.h>
 
 class util_file
 {
 public:
-	static char* LoadFile_ifstream(const char* file_path)
+	/* static char* LoadFile_ifstream(const char* file_path)
 	{
 		try
 		{
@@ -32,7 +32,7 @@ public:
 		{
 			fprintf(stdout, "FAILED TO READ IFSTREAM: %s, REASON: %s, CODE: %i\n", file_path, e.what(),e.code());
 		}
-	}
+	} */
 	static char* LoadFile_memorymap(const char* file_path)
 	{
 		const mio::mmap_source mmap(file_path);

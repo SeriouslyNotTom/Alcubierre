@@ -79,15 +79,17 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/mio)
 target_link_libraries(${PROJECT_NAME} mio)
 
 #for some reason glfw3 wants to compile everything including macos and linux stuff even when being built from win32
-add_definitions(-DGLFW_INCLUDE_NONE)
 if(UNIX OR SYNTHETIC)
 	set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 	set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-	add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/glfw-3.3)
+	add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/glfw-3.3-stable)
 	target_link_libraries(${PROJECT_NAME} glfw)
 	#i'm sure there is a better way to do this but i cannot be fucked
-	set(CMAKE_C_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
-	set(CMAKE_CXX_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
+	if(NOT APPLE)
+		set(CMAKE_C_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
+		set(CMAKE_CXX_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
+	endif(NOT APPLE)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif(UNIX)

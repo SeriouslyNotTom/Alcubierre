@@ -1,4 +1,5 @@
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 void Window::CenterWindow(GLFWmonitor* monitor)

@@ -26,5 +26,5 @@ public:
 	static bool Test1;
 	static unordered_map<string, bool>* Tests;
 	static void AddDebugMenuHook(Debug_Menu* obj);
-	static void ImGuiFrameStart();
+	void ImGuiFrameStart();
 };

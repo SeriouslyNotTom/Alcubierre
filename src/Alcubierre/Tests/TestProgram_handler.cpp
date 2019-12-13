@@ -4,10 +4,10 @@
 
 void TestProgram_handler::ImGuiFrameStart()
 {
-	for each (ImGui_Render* obj in this->TestPrograms_ImGui_)
+	for(int i=0;i<=TestPrograms_ImGui_.size();i++)
 	{
-		obj->ImGuiFrameStart();
-		obj->ImGuiFrameEnd();
+		TestPrograms_ImGui_[i]->ImGuiFrameStart();
+		TestPrograms_ImGui_[i]->ImGuiFrameEnd();
 	}
 }
 
@@ -16,9 +16,9 @@ void TestProgram_handler::TestMenuStart()
 	if (ImGui::BeginMenu("Demo Programs"))
 	{
 		ImGui::TextColored(ImVec4(255, 0, 0, 255), "Placeholder Text");
-		for each (Test_Program* prg in TestPrograms_)
+		for(int i=0;i<=TestPrograms_.size();i++)
 		{
-			ImGui::Checkbox(prg->getTestName(), this->EnabledStatus[prg]);
+			ImGui::Checkbox(TestPrograms_[i]->getTestName(), this->EnabledStatus[TestPrograms_[i]]);
 			//fprintf(stdout, "DEBUG TESTMENU ITEM : %s\n", prg->getTestName());
 		}
 		ImGui::EndMenu();
@@ -30,17 +30,17 @@ void TestProgram_handler::Init()
 {
 	this->EnabledStatus = std::unordered_map<Test_Program*, bool*>();
 	//debug here, disapears here
-	for each (Test_Program* obj in TestPrograms_)
+	for(int i=0;i<=TestPrograms_.size();i++)
 	{
-		this->EnabledStatus[obj] = obj->getEnableStatusPTR();
+		this->EnabledStatus[TestPrograms_[i]] = TestPrograms_[i]->getEnableStatusPTR();
 	}
 }
 
 void TestProgram_handler::Render()
 {
-	for each (Test_Program* prg in TestPrograms_)
+	for(int i=0;i<=TestPrograms_.size();i++)
 	{
-		if (this->EnabledStatus[prg]) { prg->performRender(); }
+		if (this->EnabledStatus[TestPrograms_[i]]) { TestPrograms_[i]->performRender(); }
 	}
 }
 
