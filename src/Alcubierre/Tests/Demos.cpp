@@ -245,7 +245,7 @@ public:
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //GL_NEAREST = no smoothing
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-			unsigned char* data = stbi_load("C:\\Users\\tom\\Desktop\\thing.png", &image_width, &image_height, &image_channels, STBI_rgb_alpha);
+			unsigned char* data = stbi_load("assets\\thing.png", &image_width, &image_height, &image_channels, STBI_rgb_alpha);
 			if (data)
 			{
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);

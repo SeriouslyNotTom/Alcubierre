@@ -1,5 +1,6 @@
 {
   "ExpandedNodes": [
+    "",
     "\\lib",
     "\\lib\\src",
     "\\src",
@@ -11,5 +12,6 @@
     "\\src\\Alcubierre\\Tests",
     "\\toolchains"
   ],
+  "SelectedNode": "\\src\\Alcubierre\\Tests\\Demos.cpp",
   "PreviewInSolutionExplorer": false
 }

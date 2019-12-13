@@ -50,13 +50,13 @@ void Debug_Interface::Render()
 	if (ImGui::BeginMenu("Debug"))
 	{
 		ImGui::Checkbox("DearImGui Demo Program", &Debug_Interface::showDemo);
-		for (int k=0;k<=menu_objs.size();k++)
+		for (int k=0;k<menu_objs.size();k++)
 		{
 			menu_objs[k]->DebugMenuStart();
 		}
 		if (ImGui::BeginMenu("Tests"))
 		{
-			for (int i=0;i<=menu_objs.size();i++)
+			for (int i=0;i<menu_objs.size();i++)
 			{
 				menu_objs[i]->TestMenuStart();
 			}

@@ -53,14 +53,6 @@ void CreateWindow_Callback(Window* window)
 #endif // __APPLE__
 }
 
-class fuckyinterface : public ImGui_Render
-{
-	void ImGuiFrameStart()
-	{
-		Debug_Interface::ImGuiFrameStart();
-	}
-};
-
 TestProgram_handler Alcubierre::TestPrograms = TestProgram_handler();
 Demos Demo_Programs = Demos();
 Debug_Metrics Alcubierre::DebugMetrics = Debug_Metrics();
@@ -80,12 +72,12 @@ int main(int argc, char *argv[])
 	std::vector<unsigned char> image_large;
 	std::vector<unsigned char> image_smol;
 
-	lodepng::load_file(data, "C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico.png");
+	lodepng::load_file(data, "assets\\ico.png");
 	unsigned width_large, height_large;
 	lodepng::decode(image_large, width_large, height_large, data);
 	unsigned width_smol, height_smol;
 	data.clear();
-	lodepng::load_file(data, "C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\ico_smol.png");
+	lodepng::load_file(data, "assets\\ico_smol.png");
 	lodepng::decode(image_smol, width_smol, height_smol, data);
 	data.clear();
 
@@ -111,8 +103,7 @@ int main(int argc, char *argv[])
 	Alcubierre::RenderManager.myWindow = window;
 
 	ImGui_Handler dearImGui = ImGui_Handler();
-	fuckyinterface fckint = fuckyinterface();
-	dearImGui.AddImGuiRenderableOBJ(&fckint);
+	dearImGui.AddImGuiRenderableOBJ(new Debug_Interface);
 	dearImGui.AddImGuiRenderableOBJ(&Alcubierre::TestPrograms);
 	Debug_Interface::AddDebugMenuHook(&Alcubierre::TestPrograms);
 	
@@ -146,8 +137,8 @@ int main(int argc, char *argv[])
 
 	RGBA bg_col = Colors::To_Normalized(Colors::JAPANESE_INDIGO);
 	
-	Alcubierre::RenderManager.AddShader(string("Standard"),"C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\standard.vshad","C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\standard.fshad");
-	Alcubierre::RenderManager.AddShader(string("Texture"), "C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\texture.vshad", "C:\\Users\\tom\\Documents\\Github\\Alcubierre\\output\\runtime\\assets\\texture.fshad");
+	Alcubierre::RenderManager.AddShader(string("Standard"),"assets\\standard.vshad","assets\\standard.fshad");
+	Alcubierre::RenderManager.AddShader(string("Texture"), "assets\\texture.vshad", "assets\\texture.fshad");
 
 	while(!glfwWindowShouldClose(window->glfw_window))
 	{
