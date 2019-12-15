@@ -9,12 +9,13 @@
 #include <mio/mmap.hpp>
 #include <algorithm>
 #include <fcntl.h>
-//#include <io.h>
+#include <sys/uio.h>
+#include <cstring>
 
 class util_file
 {
 public:
-	/* static char* LoadFile_ifstream(const char* file_path)
+	static char* LoadFile_ifstream(const char* file_path)
 	{
 		try
 		{
@@ -25,14 +26,15 @@ public:
 			char* buffer = new char[buff.st_size];
 			buffer[buff.st_size] = '\0';
 			FileStream.read(buffer, buff.st_size);
-			fprintf(stdout, "\x1B[36m-------------------------------\n%s\n%s\n-------------------------------\n\033[0m", file_path, buffer);
+			//debug stuff
+			//fprintf(stdout, "\x1B[36m-------------------------------\n%s\n%s\n-------------------------------\n\033[0m", file_path, buffer);
 			return buffer;
 		}
 		catch (std::ifstream::failure e)
 		{
 			fprintf(stdout, "FAILED TO READ IFSTREAM: %s, REASON: %s, CODE: %i\n", file_path, e.what(),e.code());
 		}
-	} */
+	}
 	static char* LoadFile_memorymap(const char* file_path)
 	{
 		const mio::mmap_source mmap(file_path);

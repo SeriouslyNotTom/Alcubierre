@@ -10,6 +10,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
 #include <Alcubierre/Libraries/Utilities/stb_image.h>
+#include <main.h>
 
 
 class Test1 : public Test_Program, public ImGui_Render
@@ -125,7 +126,8 @@ public:
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //GL_NEAREST = no smoothing
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-			unsigned char* data = stbi_load("C:\\Users\\tom\\Desktop\\thing.png", &image_width, &image_height, &image_channels, STBI_rgb_alpha);
+			std::string img = asset_path+"thing.png";
+			unsigned char* data = stbi_load(img.c_str(), &image_width, &image_height, &image_channels, STBI_rgb_alpha);
 			if (data)
 			{
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -245,7 +247,7 @@ public:
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //GL_NEAREST = no smoothing
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-			unsigned char* data = stbi_load("assets\\thing.png", &image_width, &image_height, &image_channels, STBI_rgb_alpha);
+			unsigned char* data = stbi_load("thing.png", &image_width, &image_height, &image_channels, STBI_rgb_alpha);
 			if (data)
 			{
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);

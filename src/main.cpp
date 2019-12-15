@@ -17,7 +17,7 @@
 #include <Alcubierre/Libraries/Utilities/lodepng.h>
 #include <Alcubierre/Libraries/Render/RenderManager.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
-#include <Alcubierre/Libraries/Debug/ImGui_handler.h>
+#include <Alcubierre/Libraries/Debug/ImGui_Handler.h>
 #include <Alcubierre/Libraries/Utilities/color.h>
 #include <Alcubierre/Libraries/Debug/Debug_interface.h>
 #include <Alcubierre/Tests/TestProgram_handler.h>
@@ -45,6 +45,10 @@ void CreateWindow_Callback(Window* window)
 	window->glfw_monitor = NULL;
 	window->window_title_ = string(PROJECT_NAME_READABLE);
 	window->scaling_factor = 1;
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -136,9 +140,12 @@ int main(int argc, char *argv[])
 	glfwSwapInterval(0);
 
 	RGBA bg_col = Colors::To_Normalized(Colors::JAPANESE_INDIGO);
+
 	
-	Alcubierre::RenderManager.AddShader(string("Standard"),"assets\\standard.vshad","assets\\standard.fshad");
-	Alcubierre::RenderManager.AddShader(string("Texture"), "assets\\texture.vshad", "assets\\texture.fshad");
+	
+	Alcubierre::RenderManager.AddShader(string("Standard"),asset_path+"standard.vshad",asset_path+"standard.fshad");
+	Alcubierre::RenderManager.AddShader(string("Texture"), asset_path+"texture.vshad", asset_path+"texture.fshad");
+
 
 	while(!glfwWindowShouldClose(window->glfw_window))
 	{

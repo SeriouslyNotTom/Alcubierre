@@ -5,7 +5,7 @@
 
 # Configuration directories and files
 SourceDirectory: /home/tom/Desktop/Alcubierre/lib/src/mio
-BuildDirectory: /home/tom/Desktop/Alcubierre/lib/src/mio
+BuildDirectory: /home/tom/Desktop/Alcubierre/build/lib/src/mio
 
 # Where to place the cost data store
 CostDataFile: 
@@ -14,7 +14,7 @@ CostDataFile:
 Site: Tom-ThinkPad-X250
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Linux-c++
+BuildName: Linux-x86_64-linux-gnu-g++-8
 
 # Subprojects
 LabelsForSubprojects: 
@@ -72,7 +72,7 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: /usr/bin/c++
+Compiler: /usr/bin/x86_64-linux-gnu-g++-8
 CompilerVersion: 8.3.0
 
 # Dynamic analysis (MemCheck)

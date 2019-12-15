@@ -25,7 +25,7 @@ public:
 	void Init();
 	Window* myWindow;
 	std::unordered_map<std::string, GLuint> shaders;
-	void AddShader(std::string name, char* vertex_path, char* fragment_path);
+	void AddShader(std::string name, std::string vertex_path, std::string fragment_path);
 
 private:
 	std::vector<Renderable*> RenderOBJs_;

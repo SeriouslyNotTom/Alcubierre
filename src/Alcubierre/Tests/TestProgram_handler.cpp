@@ -1,5 +1,5 @@
 #include <Alcubierre/Tests/TestProgram_handler.h>
-#include <ImGui.h>
+#include <imgui.h>
 #include <glad/glad.h>
 
 void TestProgram_handler::ImGuiFrameStart()

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
-#include <Alcubierre/Libraries/Debug/ImGui_handler.h>
+#include <Alcubierre/Libraries/Debug/ImGui_Handler.h>
 #include <stdlib.h>
 #include <map>
 #include <unordered_map>

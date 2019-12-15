@@ -29,8 +29,8 @@ void Render_Manager::Render_HOOK()
 	this->DoRenders_();
 }
 
-void Render_Manager::AddShader(std::string name, char* vertex_path, char* fragment_path)
+void Render_Manager::AddShader(std::string name, std::string vertex_path, std::string fragment_path)
 {
-	GLuint new_shader = Shader_Loader::CompileShader(vertex_path, fragment_path);
+	GLuint new_shader = Shader_Loader::CompileShader(vertex_path.c_str(), fragment_path.c_str());
 	this->shaders.insert({ name,new_shader });
 }

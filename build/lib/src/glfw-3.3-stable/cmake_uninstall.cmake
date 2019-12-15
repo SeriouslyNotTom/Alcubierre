@@ -1,9 +1,9 @@
 
-if (NOT EXISTS "/home/tom/Desktop/Alcubierre/lib/src/glfw-3.3-stable/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: \"/home/tom/Desktop/Alcubierre/lib/src/glfw-3.3-stable/install_manifest.txt\"")
+if (NOT EXISTS "/home/tom/Desktop/Alcubierre/build/lib/src/glfw-3.3-stable/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: \"/home/tom/Desktop/Alcubierre/build/lib/src/glfw-3.3-stable/install_manifest.txt\"")
 endif()
 
-file(READ "/home/tom/Desktop/Alcubierre/lib/src/glfw-3.3-stable/install_manifest.txt" files)
+file(READ "/home/tom/Desktop/Alcubierre/build/lib/src/glfw-3.3-stable/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})

@@ -1,4 +1,4 @@
-#include <Alcubierre/Libraries/Debug/ImGui_handler.h>
+#include <Alcubierre/Libraries/Debug/ImGui_Handler.h>
 
 #include <Alcubierre/Libraries/Render/RenderManager.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
