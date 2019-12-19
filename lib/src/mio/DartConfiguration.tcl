@@ -4,40 +4,30 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/tom/Desktop/Alcubierre/lib/src/mio
-BuildDirectory: /home/tom/Desktop/Alcubierre/lib/src/mio
+SourceDirectory: /Users/tom/Desktop/Alcubierre/lib/src/mio
+BuildDirectory: /Users/tom/Desktop/Alcubierre/lib/src/mio
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: Tom-ThinkPad-X250
+Site: Toms-Mac-mini.local
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Linux-c++
+BuildName: Darwin-c++
 
 # Subprojects
 LabelsForSubprojects: 
 
 # Submission information
-IsCDash: 
-CDashVersion: 
-QueryCDashVersion: 
-DropSite: 
-DropLocation: 
-DropSiteUser: 
-DropSitePassword: 
-DropSiteMode: 
-DropMethod: http
-TriggerSite: 
-ScpCommand: /usr/bin/scp
+SubmitURL: http://
 
 # Dashboard start time
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/tom/Desktop/Alcubierre/lib/src/mio"
-MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
+ConfigureCommand: "/usr/local/Cellar/cmake/3.15.4/bin/cmake" "/Users/tom/Desktop/Alcubierre/lib/src/mio"
+MakeCommand: /usr/local/Cellar/cmake/3.15.4/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -49,12 +39,12 @@ CVSCommand: CVSCOMMAND-NOTFOUND
 CVSUpdateOptions: -d -A -P
 
 # Subversion options
-SVNCommand: SVNCOMMAND-NOTFOUND
+SVNCommand: /usr/bin/svn
 SVNOptions: 
 SVNUpdateOptions: 
 
 # Git options
-GITCommand: /usr/bin/git
+GITCommand: /usr/local/bin/git
 GITInitSubmodules: 
 GITUpdateOptions: 
 GITUpdateCustom: 
@@ -72,8 +62,8 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: /usr/bin/c++
-CompilerVersion: 8.3.0
+Compiler: /Library/Developer/CommandLineTools/usr/bin/c++
+CompilerVersion: 10.0.0.10001044
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
