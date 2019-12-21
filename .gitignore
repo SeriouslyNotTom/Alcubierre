@@ -20,3 +20,4 @@ src/config.h
 *.VC.db
 *.app
 *.a
+build

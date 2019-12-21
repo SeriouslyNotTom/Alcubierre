@@ -7,11 +7,10 @@
     "\\src\\Alcubierre",
     "\\src\\Alcubierre\\Libraries",
     "\\src\\Alcubierre\\Libraries\\Debug",
-    "\\src\\Alcubierre\\Libraries\\Render",
+    "\\src\\Alcubierre\\Libraries\\Debug\\Console",
     "\\src\\Alcubierre\\Libraries\\Utilities",
-    "\\src\\Alcubierre\\Tests",
     "\\toolchains"
   ],
-  "SelectedNode": "\\src\\Alcubierre\\Tests\\Demos.cpp",
+  "SelectedNode": "\\src\\main.cpp",
   "PreviewInSolutionExplorer": false
 }

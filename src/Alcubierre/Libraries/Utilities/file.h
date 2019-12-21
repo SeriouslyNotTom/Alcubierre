@@ -9,7 +9,9 @@
 #include <mio/mmap.hpp>
 #include <algorithm>
 #include <fcntl.h>
-#include <sys/uio.h>
+#if LINUX
+	#include <sys/uio.h>
+#endif LINUX
 #include <cstring>
 
 class util_file

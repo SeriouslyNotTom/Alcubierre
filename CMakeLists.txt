@@ -34,7 +34,9 @@ if(WIN32)
 	if(NOT SYNTHETIC)
 	target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/glfw3.lib)
 	endif(NOT SYNTHETIC)
+
 	target_link_libraries(${PROJECT_NAME} gdi32)
+	target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/OpenAL32.lib)
 endif(WIN32)
 
 if(UNIX)

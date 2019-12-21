@@ -27,11 +27,10 @@
 #include <Alcubierre/Libraries/Render/Shader.h>
 #include <Alcubierre/Libraries/Resource/Provider_base.h>
 #include <Alcubierre/Libraries/Utilities/convert.h>
+#include <Alcubierre/Libraries/Debug/Console/Console_Utils.h>
 
 using namespace std;
 using namespace glm;
-
-typedef void(*FPTR)();
 
 void error_callback(int error, const char* description)
 {
@@ -45,10 +44,12 @@ void CreateWindow_Callback(Window* window)
 	window->glfw_monitor = NULL;
 	window->window_title_ = string(PROJECT_NAME_READABLE);
 	window->scaling_factor = 1;
+#ifdef LINUX
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#endif LINUX
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -61,11 +62,14 @@ TestProgram_handler Alcubierre::TestPrograms = TestProgram_handler();
 Demos Demo_Programs = Demos();
 Debug_Metrics Alcubierre::DebugMetrics = Debug_Metrics();
 Render_Manager Alcubierre::RenderManager = Render_Manager();
+State Alcubierre::ProgramState = State();
 
 int main(int argc, char *argv[])
 {
 	fprintf(stdout,"%s (%s) [%s %s] %s\n",PROJECT_NAME_READABLE, PROJECT_OS, PROJECT_VER, PROJECT_VER_TYPE, PROJECT_BUILD_DATE);
 	fprintf(stdout, "GLFW %s\n",glfwGetVersionString());
+	Alcubierre::ProgramState.argc = argc;
+	Alcubierre::ProgramState.argv = argv;
 
 	glfwSetErrorCallback(&error_callback);
 	
@@ -76,12 +80,12 @@ int main(int argc, char *argv[])
 	std::vector<unsigned char> image_large;
 	std::vector<unsigned char> image_smol;
 
-	lodepng::load_file(data, "assets\\ico.png");
+	lodepng::load_file(data, ((asset_path+"ico.png").c_str()));
 	unsigned width_large, height_large;
 	lodepng::decode(image_large, width_large, height_large, data);
 	unsigned width_smol, height_smol;
 	data.clear();
-	lodepng::load_file(data, "assets\\ico_smol.png");
+	lodepng::load_file(data, ((asset_path+"ico_smol.png").c_str()));
 	lodepng::decode(image_smol, width_smol, height_smol, data);
 	data.clear();
 
