@@ -1,5 +1,5 @@
 #pragma once
-
+#define GLFW_INCLUDE_NONE
 #include <iostream>
 #include <Alcubierre/Tests/TestProgram_handler.h>
 #include <Alcubierre/Libraries/Debug/Metrics.h>
@@ -13,6 +13,12 @@ public:
 	static Debug_Metrics DebugMetrics;
 	static Render_Manager RenderManager;
 	static State ProgramState;
+
+	static void Intro(int agc, char **argv);
+	static void Init();
+	static void Tick();
+	static void Cleanup();
+
 };
 
 static Window *my_window;

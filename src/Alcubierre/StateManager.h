@@ -1,5 +1,6 @@
+#pragma once
+
 #include <stdlib.h>
-#include <string>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 
 enum Program_State {INTRO,INIT,RENDER,PRESENT};
@@ -13,9 +14,13 @@ public:
 class State
 {
 public:
+	bool running = true;
 	Program_State ProgramState = Program_State::INTRO;
-	int argc;
-	char** argv;
+	int _argc;
+	char** _argv;
 	Static_Flags SFlags = Static_Flags();
+	void Intro(int argc, char** argv) { _argc = argc; _argv = argv; }
+
+
 };
 
