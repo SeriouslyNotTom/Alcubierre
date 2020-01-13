@@ -6,9 +6,6 @@
     "\\src",
     "\\src\\Alcubierre",
     "\\src\\Alcubierre\\Libraries",
-    "\\src\\Alcubierre\\Libraries\\Debug",
-    "\\src\\Alcubierre\\Libraries\\Render",
-    "\\src\\Alcubierre\\Libraries\\Utilities",
     "\\temp",
     "\\toolchains"
   ],

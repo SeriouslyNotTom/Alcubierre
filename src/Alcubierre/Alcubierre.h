@@ -5,6 +5,7 @@
 #include <Alcubierre/Libraries/Debug/Metrics.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 #include <Alcubierre/StateManager.h>
+#include <Alcubierre/Engine.h>
 
 class Alcubierre
 {
@@ -13,6 +14,7 @@ public:
 	static Debug_Metrics DebugMetrics;
 	static Render_Manager RenderManager;
 	static State ProgramState;
+	static Engine _Engine;
 
 	static void Intro(int agc, char **argv);
 	static void Init();

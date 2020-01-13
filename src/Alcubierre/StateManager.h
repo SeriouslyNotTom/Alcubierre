@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 
-enum Program_State {INTRO,INIT,RENDER,PRESENT};
+enum Program_Possition {INTRO,INIT,RENDER,PRESENT};
 
 class Static_Flags
 {
@@ -15,7 +15,7 @@ class State
 {
 public:
 	bool running = true;
-	Program_State ProgramState = Program_State::INTRO;
+	Program_Possition Possition = Program_Possition::INTRO;
 	int _argc;
 	char** _argv;
 	Static_Flags SFlags = Static_Flags();
