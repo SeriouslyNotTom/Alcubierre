@@ -22,7 +22,7 @@ add_executable (${PROJECT_NAME} ${SRC})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/output/debug/)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/output/debug/)
-configure_file(${PROJECT_SOURCE_DIR}/src/config.h.in ${PROJECT_SOURCE_DIR}/src/config.h)
+configure_file(${PROJECT_SOURCE_DIR}/src/Alcubierre/build_info.h.in ${PROJECT_SOURCE_DIR}/src/Alcubierre/build_info.h)
 
 find_package(OpenGL REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARY})

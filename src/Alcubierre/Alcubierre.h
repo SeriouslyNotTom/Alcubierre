@@ -6,21 +6,26 @@
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 #include <Alcubierre/StateManager.h>
 #include <Alcubierre/Engine.h>
+#include <Alcubierre/build_info.h>
 
-class Alcubierre
+struct _Info
 {
-public:
-	static TestProgram_handler TestPrograms;
-	static Debug_Metrics DebugMetrics;
-	static Render_Manager RenderManager;
-	static State ProgramState;
-	static Engine _Engine;
-
-	static void Intro(int agc, char **argv);
-	static void Init();
-	static void Tick();
-	static void Cleanup();
-
+	const char* Alcubierre_Build_Type;
+	const char* Alcubierre_Build_Date;
 };
 
-static Window *my_window;
+class _Basic_Config
+{
+	bool windowed = true;
+};
+
+namespace Alcubierre
+{
+	static _Info Info;
+	static _Basic_Config Basic_Config;
+	extern int argc;
+	extern char* argv;
+	void Accept_Arguments(int argc, char* argv);
+	void Initialize_Core();
+	void Exit(int code);
+}

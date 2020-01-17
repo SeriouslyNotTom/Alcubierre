@@ -1,14 +1,38 @@
+#pragma once
+#include <Alcubierre/Alcubierre.h>
 
-class Render
+class _Render
 {
 public:
-	enum Video_Modes { Fullscreen, Windowed, Borderless_Fullscreen };
-	Video_Modes Mode;
+	enum _WindowModes { Fullscreen, Windowed, Borderless_Fullscreen };
+	_WindowModes WindowMode;
+
+
+
 };
 
-class Engine
+class _StaticFlags
 {
 public:
-	static Render _Render;
+	bool SteamEnabled = false;
 };
 
+class _Engine
+{
+public:
+	static _Render Render;
+	static _StaticFlags StaticFlags;
+
+	void Initialize();
+};
+
+namespace Alcubierre
+{
+	namespace Engine
+	{
+		void Initialize();
+		extern Window* _PrimaryWindow;
+		void CreateWindow(WindowManager::WindowCreationCallback* NewWindowCallback);
+		void SetupContext();
+	}
+}

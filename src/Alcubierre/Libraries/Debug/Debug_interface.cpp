@@ -27,13 +27,13 @@ void Debug_Interface::Render()
 
 	if (ImGui::Begin("Debug Metrics"))
 	{
-		ImGui::Text("Monitor Name: %s", Alcubierre::DebugMetrics.Monitor_Name);
+		/*ImGui::Text("Monitor Name: %s", Alcubierre::DebugMetrics.Monitor_Name);
 		ImGui::Text("Monitor Refresh Rate: %iHz", Alcubierre::DebugMetrics.Monitor_Refresh_Rate);
 		ImGui::Text("Monitor Scale: %f", Alcubierre::DebugMetrics.Monitor_Scale);
 		ImGui::Text("GL_RENDERER : %s", Alcubierre::DebugMetrics.GPU_NAME);
 		ImGui::Text("GL_VERSION : %s", Alcubierre::DebugMetrics.OPENGL_VER);
 		ImGui::Text("Memory Usage : %s", util_convert::format_size(Alcubierre::DebugMetrics.getMemoryUsage()).c_str());
-		ImGui::End();
+		ImGui::End();*/
 	}
 
 	if (showDemo) { ImGui::ShowDemoWindow(&Debug_Interface::showDemo); }

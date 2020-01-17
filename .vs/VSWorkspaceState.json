@@ -1,14 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\lib",
-    "\\lib\\src",
     "\\src",
     "\\src\\Alcubierre",
     "\\src\\Alcubierre\\Libraries",
+    "\\src\\Alcubierre\\Libraries\\Debug",
+    "\\src\\Alcubierre\\Libraries\\Render",
+    "\\src\\Alcubierre\\Libraries\\Render\\Window",
+    "\\src\\DevGame",
     "\\temp",
     "\\toolchains"
   ],
-  "SelectedNode": "\\src\\Alcubierre\\Alcubierre.h",
+  "SelectedNode": "\\src\\DevGame\\DevGame.cpp",
   "PreviewInSolutionExplorer": false
 }
