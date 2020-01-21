@@ -32,7 +32,7 @@ namespace Alcubierre
 	{
 		void Initialize();
 		extern Window* _PrimaryWindow;
-		void CreateWindow(WindowManager::WindowCreationCallback* NewWindowCallback);
+		void SpawnWindow(WindowManager::WindowCreationCallback* NewWindowCallback);
 		void SetupContext();
 	}
 }

@@ -3,10 +3,7 @@
     "",
     "\\src",
     "\\src\\Alcubierre",
-    "\\src\\Alcubierre\\Libraries",
-    "\\src\\Alcubierre\\Libraries\\Debug",
-    "\\src\\Alcubierre\\Libraries\\Render",
-    "\\src\\Alcubierre\\Libraries\\Render\\Window",
+    "\\src\\Alcubierre\\Settings",
     "\\src\\DevGame",
     "\\temp",
     "\\toolchains"

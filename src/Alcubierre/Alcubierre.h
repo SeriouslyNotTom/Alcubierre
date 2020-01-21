@@ -4,7 +4,6 @@
 #include <Alcubierre/Tests/TestProgram_handler.h>
 #include <Alcubierre/Libraries/Debug/Metrics.h>
 #include <Alcubierre/Libraries/Render/Window/WindowManager.h>
-#include <Alcubierre/StateManager.h>
 #include <Alcubierre/Engine.h>
 #include <Alcubierre/build_info.h>
 

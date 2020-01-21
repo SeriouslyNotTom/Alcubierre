@@ -2,6 +2,10 @@
 #include <Alcubierre/Alcubierre.h>
 #include <Alcubierre/Engine.h>
 #include <GLFW/glfw3.h>
+#include <Alcubierre/Render/Primative.h>
+#include <Alcubierre/Render/Text.h>
+#define ASIO_NO_WIN32_LEAN_AND_MEAN
+#include <Alcubierre/Engine.h>
 
 void WindowCallback(Window* window)
 {
@@ -18,7 +22,9 @@ int main(int argc, char* argv[])
 	Alcubierre::Initialize_Core();
 	Alcubierre::Engine::Initialize();
 	WindowManager::WindowCreationCallback window_cb = static_cast<WindowManager::WindowCreationCallback>(&WindowCallback);
-	Alcubierre::Engine::CreateWindow(&window_cb);
+	Alcubierre::Engine::SpawnWindow(&window_cb);
+
+	Alcubierre::Render::Text(1, 1, "fuck");
 
 	glfwMakeContextCurrent(Alcubierre::Engine::_PrimaryWindow->glfw_window);
 	glfwSwapInterval(1);

@@ -31,7 +31,7 @@ void Alcubierre::Engine::SetupContext()
 	}
 }
 
-void Alcubierre::Engine::CreateWindow(WindowManager::WindowCreationCallback* NewWindowCallback)
+void Alcubierre::Engine::SpawnWindow(WindowManager::WindowCreationCallback* NewWindowCallback)
 {
 	Alcubierre::Engine::_PrimaryWindow = WindowManager::newWindow(NewWindowCallback);
 	Alcubierre::Engine::SetupContext();
