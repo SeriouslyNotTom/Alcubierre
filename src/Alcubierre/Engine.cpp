@@ -8,7 +8,7 @@ void error_callback(int error, const char* description)
 
 //i love you c++, i really do (totally not sarcasm)
 Window* Alcubierre::Engine::_PrimaryWindow = NULL;
-std::unordered_map<char*, Alcubierre::Renderer::RenderQueueOBJ> *Alcubierre::Renderer::RenderQueue;
+std::unordered_map<char*, Alcubierre::Renderer::RenderQueueOBJ>* Alcubierre::Renderer::RenderQueue = NULL;
 
 void Alcubierre::Engine::Initialize()
 {
@@ -44,7 +44,7 @@ void Alcubierre::Engine::SpawnWindow(WindowManager::WindowCreationCallback* NewW
 bool Alcubierre::Renderer::Initialize()
 {
 	Alcubierre::Debug::Log::Info("Renderer Initializing...");
-	Alcubierre::Renderer::RenderQueue = &std::unordered_map<char*, RenderQueueOBJ>();
+	Alcubierre::Renderer::RenderQueue = new std::unordered_map<char*, RenderQueueOBJ>();
 	Alcubierre::Debug::Log::Info("Done");
 	return true;
 }

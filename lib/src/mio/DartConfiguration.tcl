@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: /Users/tom/Desktop/Alcubierre/lib/src/mio
-BuildDirectory: /Users/tom/Desktop/Alcubierre/lib/src/mio
+SourceDirectory: /Users/tom/Desktop/Git/Alcubierre/lib/src/mio
+BuildDirectory: /Users/tom/Desktop/Git/Alcubierre/lib/src/mio
 
 # Where to place the cost data store
 CostDataFile: 
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/local/Cellar/cmake/3.15.4/bin/cmake" "/Users/tom/Desktop/Alcubierre/lib/src/mio"
+ConfigureCommand: "/usr/local/Cellar/cmake/3.15.4/bin/cmake" "/Users/tom/Desktop/Git/Alcubierre/lib/src/mio"
 MakeCommand: /usr/local/Cellar/cmake/3.15.4/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
