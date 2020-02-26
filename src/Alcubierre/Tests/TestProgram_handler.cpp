@@ -36,12 +36,13 @@ void TestProgram_handler::Init()
 	}
 }
 
-void TestProgram_handler::Render()
+bool TestProgram_handler::OnRender()
 {
 	for(int i=0;i<TestPrograms_.size();i++)
 	{
 		if (this->EnabledStatus[TestPrograms_[i]]) { TestPrograms_[i]->performRender(); }
 	}
+	return true;
 }
 
 void TestProgram_handler::AddProgram(Test_Program* program)

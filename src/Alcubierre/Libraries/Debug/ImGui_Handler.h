@@ -1,7 +1,6 @@
 #pragma once
 
-#include <Alcubierre/Libraries/Render/RenderManager.h>
-#include <Alcubierre/Libraries/Render/Window/WindowManager.h>
+#include <Alcubierre/Engine.h>
 
 class ImGui_Render
 {
@@ -10,19 +9,19 @@ public:
 	virtual void ImGuiFrameEnd() {};
 };
 
-class ImGui_Handler : public Renderable
+class ImGui_Handler : public Alcubierre::Renderer::IRenderable
 {
 private:
 	std::vector<ImGui_Render*> ImGuiObjs;
-	Window* window_;
+	Alcubierre::Engine::Window::WindowInstance* window;
 	void ImGui_Frame_Start();
 	void ImGui_Frame_End();
 public:
-	void AcceptWindow(Window* window);
+	void AcceptWindow(Alcubierre::Engine::Window::WindowInstance* window);
 	void ApplyColors();
 	void ApplyStyles();
 	void Init();
-	void Render();
+	bool OnRender();
 	const typedef void (*FrameStartCB)();
 	std::vector<void(*)()> frame_start_callbacks_;
 	void AddFrameStart(void(*cbf)());

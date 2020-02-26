@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 
 class Debug_Metrics
 {
@@ -14,7 +13,7 @@ public:
 	const char* GPU_NAME = "666";
 	const char* GLFW_NAME = "666";
 	const char* OPENGL_VER = "666";
-	void GLFW3_DONE(Window* window);
+	//void GLFW3_DONE(Window* window);
 
 	int getMemoryUsage();
 };

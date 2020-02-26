@@ -5,11 +5,12 @@
     "\\src\\Alcubierre",
     "\\src\\Alcubierre\\Libraries",
     "\\src\\Alcubierre\\Libraries\\Render",
+    "\\src\\Alcubierre\\Libraries\\Render\\Window",
     "\\src\\Alcubierre\\Render",
     "\\src\\DevGame",
     "\\temp",
     "\\toolchains"
   ],
-  "SelectedNode": "\\src\\Alcubierre\\Engine.h",
+  "SelectedNode": "\\src\\Alcubierre\\Libraries\\Render\\Window\\WindowManager.h",
   "PreviewInSolutionExplorer": false
 }

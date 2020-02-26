@@ -1,7 +1,6 @@
 #pragma once
 #define GLFW_INCLUDE_NONE
 #include <iostream>
-#include <Alcubierre/Libraries/Render/Window/WindowManager.h>
 #include <Alcubierre/Engine.h>
 #include <Alcubierre/build_info.h>
 

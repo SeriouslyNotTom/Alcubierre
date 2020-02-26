@@ -1,8 +1,5 @@
  #include <Alcubierre/Libraries/Debug/ImGui_Handler.h>
 
-#include <Alcubierre/Libraries/Render/RenderManager.h>
-#include <Alcubierre/Libraries/Render/Window/WindowManager.h>
-
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
@@ -21,9 +18,9 @@ void ImGui_Handler::ImGui_Frame_Start()
 	}
 }
 
-void ImGui_Handler::AcceptWindow(Window* window)
+void ImGui_Handler::AcceptWindow(Alcubierre::Engine::Window::WindowInstance* window_)
 {
-	this->window_ = window;
+	this->window = window_;
 }
 
 void ImGui_Handler::ApplyColors()
@@ -90,7 +87,7 @@ void ImGui_Handler::ApplyStyles()
 	current_style->ChildBorderSize = 0;
 	current_style->FrameBorderSize = 0;
 	current_style->PopupBorderSize = 0;
-	current_style->WindowPadding = ImVec2(4 * window_->scaling_factor, 4 * window_->scaling_factor);
+	current_style->WindowPadding = ImVec2(4 * 1, 4 * 1);
 }
 
 void ImGui_Handler::Init()
@@ -99,14 +96,14 @@ void ImGui_Handler::Init()
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
-	ImGui_ImplGlfw_InitForOpenGL(window_->glfw_window, true);
+	ImGui_ImplGlfw_InitForOpenGL(window->glfw_window, true);
 	ImGui_ImplOpenGL3_Init("#version 150");
-	ImGui::GetIO().FontGlobalScale = window_->scaling_factor;
+	//ImGui::GetIO().FontGlobalScale = window_->scaling_factor;
 	ImGui_Handler::ApplyColors();
 	ImGui_Handler::ApplyStyles();
 }
 
-void ImGui_Handler::Render()
+bool ImGui_Handler::OnRender()
 {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -116,6 +113,7 @@ void ImGui_Handler::Render()
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	return true;
 }
 
 void ImGui_Handler::AddFrameStart(void(*cbf)())
