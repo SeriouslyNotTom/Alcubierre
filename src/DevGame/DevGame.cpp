@@ -17,12 +17,12 @@ void WindowCallback(Window* window)
 	window->glfw_monitor = NULL;
 	window->window_title_ = std::string(PROJECT_NAME_READABLE);
 	window->scaling_factor = 1;
-	#ifdef __APPLE__
+	//#if defined(__APPLE__) || defined(LINUX) || defined(UNIX)
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	#endif // __APPLE__
+	//#endif // __APPLE__
 }
 
 class ImGuiDemo : public ImGui_Render
