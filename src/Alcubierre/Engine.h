@@ -1,30 +1,10 @@
 #pragma once
+
 #include <Alcubierre/Alcubierre.h>
+#include <Alcubierre/Debug/Log.h>
 
-class _Render
-{
-public:
-	enum _WindowModes { Fullscreen, Windowed, Borderless_Fullscreen };
-	_WindowModes WindowMode;
-
-
-
-};
-
-class _StaticFlags
-{
-public:
-	bool SteamEnabled = false;
-};
-
-class _Engine
-{
-public:
-	static _Render Render;
-	static _StaticFlags StaticFlags;
-
-	void Initialize();
-};
+#include <stdlib.h>
+#include <unordered_map>
 
 namespace Alcubierre
 {
@@ -35,4 +15,32 @@ namespace Alcubierre
 		void SpawnWindow(WindowManager::WindowCreationCallback* NewWindowCallback);
 		void SetupContext();
 	}
+
+	namespace Renderer
+	{
+
+		class IRenderable
+		{
+			virtual bool PreRender() {};
+			virtual bool OnRender() {};
+			virtual bool PostRender() {};
+		};
+
+		class RenderQueueOBJ
+		{
+			IRenderable* IOBJ;
+			IRenderable PreRenderHook[];
+		};
+
+		extern std::unordered_map<char*, RenderQueueOBJ> *RenderQueue;
+
+		bool Initialize();
+		void AddToQueue(IRenderable RenderableOBJ);
+	}
+
+	//namespace Window
+	//{
+
+	//}
+
 }

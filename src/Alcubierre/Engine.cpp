@@ -1,4 +1,5 @@
 #include <Alcubierre/Engine.h>
+#include <glad/glad.h>
 
 void error_callback(int error, const char* description)
 {
@@ -7,6 +8,7 @@ void error_callback(int error, const char* description)
 
 //i love you c++, i really do (totally not sarcasm)
 Window* Alcubierre::Engine::_PrimaryWindow = NULL;
+std::unordered_map<char*, Alcubierre::Renderer::RenderQueueOBJ> *Alcubierre::Renderer::RenderQueue;
 
 void Alcubierre::Engine::Initialize()
 {
@@ -33,6 +35,16 @@ void Alcubierre::Engine::SetupContext()
 
 void Alcubierre::Engine::SpawnWindow(WindowManager::WindowCreationCallback* NewWindowCallback)
 {
+	Alcubierre::Debug::Log::Info("Spawning Window...");
 	Alcubierre::Engine::_PrimaryWindow = WindowManager::newWindow(NewWindowCallback);
 	Alcubierre::Engine::SetupContext();
+	Alcubierre::Debug::Log::Info("Done");
+}
+
+bool Alcubierre::Renderer::Initialize()
+{
+	Alcubierre::Debug::Log::Info("Renderer Initializing...");
+	Alcubierre::Renderer::RenderQueue = &std::unordered_map<char*, RenderQueueOBJ>();
+	Alcubierre::Debug::Log::Info("Done");
+	return true;
 }

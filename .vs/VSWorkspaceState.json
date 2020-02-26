@@ -3,11 +3,13 @@
     "",
     "\\src",
     "\\src\\Alcubierre",
-    "\\src\\Alcubierre\\Settings",
+    "\\src\\Alcubierre\\Libraries",
+    "\\src\\Alcubierre\\Libraries\\Render",
+    "\\src\\Alcubierre\\Render",
     "\\src\\DevGame",
     "\\temp",
     "\\toolchains"
   ],
-  "SelectedNode": "\\src\\DevGame\\DevGame.cpp",
+  "SelectedNode": "\\src\\Alcubierre\\Engine.h",
   "PreviewInSolutionExplorer": false
 }

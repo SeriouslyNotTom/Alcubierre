@@ -28,13 +28,7 @@ find_package(OpenGL REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARY})
 
 if(WIN32)
-	#synthetic means being build on a platform that is not native to the build type
-	#essentially used to build libs from source when crosscompilling on linux for win32, because linking prebuilt win32 stuff from linux suuuuuuuucks
-	#the synthetic variable is set in /toolchains/window.cmake
-	if(NOT SYNTHETIC)
-	target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/glfw3.lib)
-	endif(NOT SYNTHETIC)
-
+	#synthetic means being built on a platform that is not native to the build type
 	target_link_libraries(${PROJECT_NAME} gdi32)
 	target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/OpenAL32.lib)
 endif(WIN32)
@@ -47,8 +41,13 @@ IF(APPLE)
 
 endif(APPLE)
 
-
-#going to move this stuff below to sub directories cleaning everything up. making it easier to swap in and out modules
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(GLFW_DIR "${PROJECT_SOURCE_DIR}/lib/src/glfw-3.3.2")
+include_directories("${GLFW_DIR}/include")
+add_subdirectory(${GLFW_DIR})
+target_link_libraries(${PROJECT_NAME} glfw)
 
 #glad (OpenGL 4.0, No Extensions) Might change this for linux builds as my ubuntu x230 crashes on init with gl4.0
 set(GLAD_DIR "${PROJECT_SOURCE_DIR}/lib/src/glad")
@@ -82,19 +81,10 @@ target_link_libraries(${PROJECT_NAME} mio)
 
 #for some reason glfw3 wants to compile everything including macos and linux stuff even when being built from win32
 if(UNIX OR SYNTHETIC)
-	set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-	set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-
-	add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/glfw-3.3-stable)
-	target_link_libraries(${PROJECT_NAME} glfw)
-	#i'm sure there is a better way to do this but i cannot be fucked
+	#i'm sure there is a better way to do this but i can't figure it out
 	if(NOT APPLE)
 		set(CMAKE_C_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
 		set(CMAKE_CXX_FLAGS "-static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic")
 	endif(NOT APPLE)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif(UNIX)
-
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wextra")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra")
