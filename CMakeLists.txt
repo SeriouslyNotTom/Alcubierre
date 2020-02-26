@@ -29,7 +29,7 @@ target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARY})
 
 if(WIN32)
 	#synthetic means being built on a platform that is not native to the build type
-	target_link_libraries(${PROJECT_NAME} gdi32)
+	target_link_libraries(${PROJECT_NAME} gdi32 kernel32 psapi)
 	target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/OpenAL32.lib)
 endif(WIN32)
 

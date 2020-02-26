@@ -4,17 +4,17 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/tom/Desktop/Alcubierre/lib/src/mio
-BuildDirectory: /home/tom/Desktop/Alcubierre/lib/src/mio
+SourceDirectory: /home/tom/git/Alcubierre/lib/src/mio
+BuildDirectory: /home/tom/git/Alcubierre/lib/src/mio
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: Tom-ThinkPad-X250
+Site: R610
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Linux-c++
+BuildName: Win32-make
 
 # Subprojects
 LabelsForSubprojects: 
@@ -36,7 +36,7 @@ ScpCommand: /usr/bin/scp
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/tom/Desktop/Alcubierre/lib/src/mio"
+ConfigureCommand: "/usr/bin/cmake" "/home/tom/git/Alcubierre/lib/src/mio"
 MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
@@ -72,8 +72,8 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: /usr/bin/c++
-CompilerVersion: 8.3.0
+Compiler: /usr/bin/x86_64-w64-mingw32-g++
+CompilerVersion: 7.3.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
