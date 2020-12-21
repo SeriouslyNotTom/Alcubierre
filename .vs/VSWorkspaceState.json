@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\Alcubierre",
+    "\\src\\Alcubierre\\Debug",
+    "\\src\\Alcubierre\\IO",
     "\\src\\Alcubierre\\Libraries",
-    "\\src\\Alcubierre\\Libraries\\Render",
-    "\\src\\Alcubierre\\Libraries\\Render\\Window",
-    "\\src\\Alcubierre\\Render",
+    "\\src\\Alcubierre\\Libraries\\Utilities",
     "\\src\\DevGame",
     "\\temp",
     "\\toolchains"
   ],
-  "SelectedNode": "\\src\\Alcubierre\\Libraries\\Render\\Window\\WindowManager.h",
+  "SelectedNode": "\\temp\\main.cpp",
   "PreviewInSolutionExplorer": false
 }

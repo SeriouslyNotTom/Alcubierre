@@ -5,6 +5,7 @@
 
 int Alcubierre::argc = NULL;
 char* Alcubierre::argv = NULL;
+bool Alcubierre::Debug_Mode = true;
 
 void Alcubierre::Initialize_Core()
 {

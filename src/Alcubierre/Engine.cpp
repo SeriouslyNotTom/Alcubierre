@@ -1,5 +1,7 @@
 #include <Alcubierre/Engine.h>
+#include <unordered_map>
 #include <glad/glad.h>
+#include <Alcubierre/Debug/Util.h>
 
 void error_callback(int error, const char* description)
 {
@@ -8,7 +10,8 @@ void error_callback(int error, const char* description)
 
 //i love you c++, i really do (totally not sarcasm)
 Alcubierre::Engine::Window::WindowInstance* Alcubierre::Engine::PrimaryWindow = NULL;
-std::unordered_map<char*, Alcubierre::Renderer::RenderQueueOBJ>* Alcubierre::Renderer::RenderQueue = NULL;
+std::unordered_map<char*, Alcubierre::Renderer::RenderQueueOBJ*>* Alcubierre::Renderer::RenderQueue = NULL;
+std::vector<Alcubierre::Renderer::IRenderable*> *Alcubierre::Renderer::RenderPointerQueue = NULL;
 
 void Alcubierre::Engine::Initialize()
 {
@@ -44,14 +47,37 @@ void Alcubierre::Engine::SpawnWindow(Window::WindowCreationCallback* NewWindowCa
 bool Alcubierre::Renderer::Initialize()
 {
 	Alcubierre::Debug::Log::Info("Renderer Initializing...");
-	Alcubierre::Renderer::RenderQueue = new std::unordered_map<char*, RenderQueueOBJ>();
+	Alcubierre::Renderer::RenderQueue = new std::unordered_map<char*, RenderQueueOBJ*>();
 	Alcubierre::Debug::Log::Info("Done");
+	Alcubierre::Renderer::RenderPointerQueue = new std::vector<IRenderable*>();
 	return true;
+}
+
+void Alcubierre::Renderer::RebuildList()
+{
+	Alcubierre::Debug::Break();
+	RenderPointerQueue->clear();
+
+	for (std::pair<char*, RenderQueueOBJ*> obj : *Alcubierre::Renderer::RenderQueue)
+	{
+		if (obj.second->PreRenderHook.size() > 0)
+		{
+			for (int i = 0; obj.second->PreRenderHook.size() >= i; i++)
+			{
+				RenderPointerQueue->push_back(obj.second->PreRenderHook[i]);
+			}
+		}
+		RenderPointerQueue->push_back(obj.second->IOBJ);
+	}
+}
+
+void Alcubierre::Renderer::AddToQueue(IRenderable RenderableOBJ)
+{
 }
 
 void Alcubierre::Engine::Window::WindowInstance::CenterWindow()
 {
-	CenterWindow(glfwGetPrimaryMonitor());
+	CenterWindow(glfw_monitor);
 }
 
 void Alcubierre::Engine::Window::WindowInstance::CenterWindow(GLFWmonitor* monitor)
@@ -69,6 +95,6 @@ Alcubierre::Engine::Window::WindowInstance* Alcubierre::Engine::Window::createWi
 	glfwGetWindowSize(Window->glfw_window, &Window->window_width, &Window->window_height);
 	//allan please add code to detect which monitor the progam is running in, and maybe add that to a helper class
 	Window->glfw_monitor = glfwGetPrimaryMonitor();
-	float xscale, yscale;
+	Window->CenterWindow();
 	return Window;
 }

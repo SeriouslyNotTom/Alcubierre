@@ -50,14 +50,20 @@ namespace Alcubierre
 
 		class RenderQueueOBJ
 		{
+		public:
 			IRenderable* IOBJ;
-			IRenderable PreRenderHook[];
+			std::vector<IRenderable*> PreRenderHook;
 		};
 
-		extern std::unordered_map<char*, RenderQueueOBJ> *RenderQueue;
+		extern std::unordered_map<char*, RenderQueueOBJ*> *RenderQueue;
+		extern std::vector<IRenderable*>* RenderPointerQueue;
+		static bool ListDirty;
 
 		bool Initialize();
+		void RebuildList();
 		void AddToQueue(IRenderable RenderableOBJ);
+		void AddPreRenderHook(char* RendererName, RenderQueueOBJ* HookOBJ);
+		void AddPreRenderHook(RenderQueueOBJ* Renderer, RenderQueueOBJ* HookOBJ);
 	}
 
 }

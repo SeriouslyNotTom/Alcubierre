@@ -13,6 +13,11 @@ namespace Alcubierre
 			{
 				fprintf(stdout, "\u001b[32m[LOG::INFO] \u001b[36m%s\u001b[0m\r\n", msg);
 			}
+			static char* FormatString(char* base_string, char* params ...)
+			{
+
+				return "";
+			}
 		}
 	}
 }

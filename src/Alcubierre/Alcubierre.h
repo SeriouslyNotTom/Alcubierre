@@ -17,6 +17,7 @@ class _Basic_Config
 
 namespace Alcubierre
 {
+	extern bool Debug_Mode;
 	static _Info Info;
 	static _Basic_Config Basic_Config;
 	extern int argc;

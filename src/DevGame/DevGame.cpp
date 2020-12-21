@@ -10,6 +10,7 @@
 #include <Alcubierre/Engine.h>
 #include <stdlib.h>
 #include <imgui.h>
+//#include <phonon.h>
 
 using namespace Alcubierre::Engine::Window;
 
@@ -19,6 +20,7 @@ void WindowCallback(WindowInstance* window)
 	window->window_height = 900;
 	window->glfw_monitor = NULL;
 	window->window_title = PROJECT_NAME_READABLE;
+	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, true);
 	#if defined(__linux__) || defined(__APPLE__)
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -27,11 +29,25 @@ void WindowCallback(WindowInstance* window)
 	#endif
 }
 
+float clear_col[4];
+
 class ImGuiDemo : public ImGui_Render
 {
 	void ImGuiFrameStart() 
 	{
 		ImGui::ShowDemoWindow(NULL);
+
+		if (ImGui::Begin("Renderer Test", NULL))
+		{
+			ImGui::ColorPicker4("clear color", clear_col);
+			ImGui::Checkbox("Debug Mode", &Alcubierre::Debug_Mode);
+			ImGui::Text("List Size {0}", Alcubierre::Renderer::RenderQueue->size());
+			if (ImGui::Button("Rebuild List")) { Alcubierre::Renderer::RebuildList(); }
+			ImGui::End();
+		}
+
+		
+
 	};
 	void ImGuiFrameEnd() {};
 };
@@ -46,7 +62,18 @@ int main(int argc, char* argv[])
 	WindowCreationCallback window_cb = static_cast<WindowCreationCallback>(&WindowCallback);
 	Alcubierre::Engine::SpawnWindow(&window_cb);
 
-	Alcubierre::Render::Text(1, 1, "fuck");
+	Alcubierre::Render::Text(1, 1, "niceword");
+
+	//IPLhandle context{ nullptr };
+	//iplCreateContext(nullptr, nullptr, nullptr, &context);
+	auto const samplingrate = 44100;
+	auto const framesize = 1024;
+	//IPLRenderingSettings settings{ samplingrate, framesize };
+	//IPLhandle renderer{ nullptr };
+	//IPLHrtfParams hrtfParams{ IPL_HRTFDATABASETYPE_DEFAULT, nullptr, 0};
+	//iplCreateBinauralRenderer(context, settings, hrtfParams, &renderer);
+
+	clear_col[0] = 0.07843137254901960784313725490196f; clear_col[1] = 0.0f; clear_col[2] = 0.15686274509803921568627450980392f; clear_col[3] = 0.5f;
 
 	ImGuiInstance.AcceptWindow(Alcubierre::Engine::PrimaryWindow);
 	ImGuiInstance.Init();
@@ -57,14 +84,14 @@ int main(int argc, char* argv[])
 	Alcubierre::Renderer::Initialize();
 
 	glfwMakeContextCurrent(Alcubierre::Engine::PrimaryWindow->glfw_window);
-	glfwSwapInterval(1);
+	glfwSwapInterval(0);
 
 	while (!glfwWindowShouldClose(Alcubierre::Engine::PrimaryWindow->glfw_window))
 	{
 		glfwPollEvents();
 
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-		glClearColor(0.0f, 0.0f, 0.5f, 1.0f);
+		glClearColor(clear_col[0], clear_col[1], clear_col[2], clear_col[3]);
 
 		ImGuiInstance.OnRender();
 

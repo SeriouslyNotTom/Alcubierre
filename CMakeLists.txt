@@ -5,7 +5,7 @@ SET(VERSION_TYPE "IDB") # "(I)n (D)evelopment (B)uild"
 #SET(VERSION_TYPE "RCB") # "(R)elease (C)andidate (B)uild"
 #SET(VERSION_TYPE "PVB") # "(P)re(V)iew (B)uild"
 
-#PRONOUNCED: AL-KU-BEE-EHR, I always thought it was AL-QUE-BEE-REE
+#PRONOUNCED: AL-KU-BEE-AIR, I always thought it was AL-QUE-BEE-REE
 SET(GAME_STRING "Alcubierre")
 string(TIMESTAMP PROJECT_BUILD_DATE "%Y-%m-%d")
 
@@ -30,7 +30,6 @@ target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARY})
 if(WIN32)
 	#synthetic means being built on a platform that is not native to the build type
 	target_link_libraries(${PROJECT_NAME} gdi32 kernel32 psapi)
-	target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/win64/OpenAL32.lib)
 endif(WIN32)
 
 if(UNIX)
@@ -65,7 +64,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE "${LZ4_DIR}")
 target_link_libraries(${PROJECT_NAME} "lz4")
 
 #imgui
-set(IMGUI_DIR "${PROJECT_SOURCE_DIR}/lib/src/imgui")
+#set(IMGUI_DIR "${PROJECT_SOURCE_DIR}/lib/src/imgui")
+#imgui-docking-test
+set(IMGUI_DIR "${PROJECT_SOURCE_DIR}/lib/src/imgui-docking")
 file(GLOB IMGUI_SRC
     ${IMGUI_DIR}/*.cpp
 	${IMGUI_DIR}/*.h
@@ -78,6 +79,11 @@ target_link_libraries(${PROJECT_NAME} "imgui")
 #mandreyel/mio
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/mio)
 target_link_libraries(${PROJECT_NAME} mio)
+
+#steam phonon audio
+#set(STEAM_AUDIO_DIR "${PROJECT_SOURCE_DIR}/lib/src/steamaudio_api")
+#target_link_libraries(${PROJECT_NAME} ${STEAM_AUDIO_DIR}/lib/Windows/x64/phonon.lib)
+#target_include_directories(${PROJECT_NAME} PRIVATE ${STEAM_AUDIO_DIR}/include/)
 
 #for some reason glfw3 wants to compile everything including macos and linux stuff even when being built from win32
 if(UNIX OR SYNTHETIC)
