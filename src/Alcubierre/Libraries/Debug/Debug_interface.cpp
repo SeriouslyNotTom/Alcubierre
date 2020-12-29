@@ -40,7 +40,7 @@ void Debug_Interface::Render()
 	ImGui::BeginMainMenuBar();
 	if (ImGui::BeginMenu("File"))
 	{
-		ImGui::Text("niceword you buddy");
+		ImGui::Text("fuck you buddy");
 		ImGui::EndMenu();
 	}
 	ImGui::Separator();

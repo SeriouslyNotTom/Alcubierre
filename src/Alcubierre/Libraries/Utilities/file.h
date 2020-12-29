@@ -9,7 +9,7 @@
 #include <mio/mmap.hpp>
 #include <algorithm>
 #include <fcntl.h>
-#if LINUX
+#ifndef WIN32
 	#include <sys/uio.h>
 #endif LINUX
 #include <cstring>
@@ -39,11 +39,11 @@ public:
 	}
 	static char* LoadFile_memorymap(const char* file_path)
 	{
-		const mio::mmap_source mmap(file_path);
+		mio::mmap_source file_map(file_path);
 		
-		char* data = new char[mmap.size()];
-		data[mmap.size()] = '\0';
-		memcpy(data, mmap.data(), mmap.size());
+		char* data = new char[file_map.size()];
+		data[file_map.size()] = '\0';
+		memcpy(data, file_map.data(), file_map.size());
 		return data;
 	}
 };

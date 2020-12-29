@@ -3,7 +3,6 @@
     "",
     "\\src",
     "\\src\\Alcubierre",
-    "\\src\\Alcubierre\\Debug",
     "\\src\\Alcubierre\\IO",
     "\\src\\Alcubierre\\Libraries",
     "\\src\\Alcubierre\\Libraries\\Utilities",
@@ -11,6 +10,6 @@
     "\\temp",
     "\\toolchains"
   ],
-  "SelectedNode": "\\temp\\main.cpp",
+  "SelectedNode": "\\CMakeLists.txt",
   "PreviewInSolutionExplorer": false
 }

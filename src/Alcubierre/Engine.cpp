@@ -5,7 +5,7 @@
 
 void error_callback(int error, const char* description)
 {
-	fprintf(stderr, "GLFW3 Error Code: %i ; %s\n", error, description);
+	Alcubierre::Debug::Log::Msg("Alcubierre","GLFW3 Error Code: %i ; %s", error, description);
 }
 
 //i love you c++, i really do (totally not sarcasm)
@@ -15,7 +15,7 @@ std::vector<Alcubierre::Renderer::IRenderable*> *Alcubierre::Renderer::RenderPoi
 
 void Alcubierre::Engine::Initialize()
 {
-	fprintf(stdout, "GLFW %s\n", glfwGetVersionString());
+	Alcubierre::Debug::Log::Msg("Alcubierre","GLFW %s", glfwGetVersionString());
 	glfwSetErrorCallback(&error_callback);
 	error_callback(9001, "glfw error code callback test. please ignore");
 
@@ -31,24 +31,24 @@ void Alcubierre::Engine::SetupContext()
 	glfwMakeContextCurrent(Alcubierre::Engine::PrimaryWindow->glfw_window);
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		std::cout << "Failed to initialize OpenGL context" << std::endl;
+		Alcubierre::Debug::Log::Msg("Error", "Failed to create OpenGL Context");
 		Alcubierre::Exit(-1);
 	}
 }
 
 void Alcubierre::Engine::SpawnWindow(Window::WindowCreationCallback* NewWindowCallback)
 {
-	Alcubierre::Debug::Log::Info("Spawning Window...");
+	Alcubierre::Debug::Log::Msg("Alcubierre","Spawning Window...");
 	Alcubierre::Engine::PrimaryWindow = Window::createWindow(NewWindowCallback);
 	Alcubierre::Engine::SetupContext();
-	Alcubierre::Debug::Log::Info("Done");
+	Alcubierre::Debug::Log::Msg("Alcubierre","Done");
 }
 
 bool Alcubierre::Renderer::Initialize()
 {
-	Alcubierre::Debug::Log::Info("Renderer Initializing...");
+	Alcubierre::Debug::Log::Msg("Alcubierre","Renderer Initializing...");
 	Alcubierre::Renderer::RenderQueue = new std::unordered_map<char*, RenderQueueOBJ*>();
-	Alcubierre::Debug::Log::Info("Done");
+	Alcubierre::Debug::Log::Msg("Alcubierre","Done");
 	Alcubierre::Renderer::RenderPointerQueue = new std::vector<IRenderable*>();
 	return true;
 }
@@ -91,6 +91,7 @@ Alcubierre::Engine::Window::WindowInstance* Alcubierre::Engine::Window::createWi
 	using namespace Alcubierre::Engine::Window;
 	WindowInstance* Window = new WindowInstance();
 	(*window_cb)(Window);
+	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	Window->glfw_window = glfwCreateWindow(Window->window_width, Window->window_height, Window->window_title, Window->glfw_monitor, Window->glfw_share_window);
 	glfwGetWindowSize(Window->glfw_window, &Window->window_width, &Window->window_height);
 	//allan please add code to detect which monitor the progam is running in, and maybe add that to a helper class

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unordered_map>
 #include <functional>
+#include <vector>
 
 namespace Alcubierre
 {

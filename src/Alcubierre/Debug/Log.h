@@ -2,6 +2,10 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <string.h>
+#include <stdarg.h>
+//
+//static enum ChannelColors { Red = 31, Blue };
 
 namespace Alcubierre
 {
@@ -9,15 +13,10 @@ namespace Alcubierre
 	{
 		namespace Log
 		{
-			static void Info(char* msg)
-			{
-				fprintf(stdout, "\u001b[32m[LOG::INFO] \u001b[36m%s\u001b[0m\r\n", msg);
-			}
-			static char* FormatString(char* base_string, char* params ...)
-			{
+			//void setChannelColor(char* channel, ChannelColors color);
 
-				return "";
-			}
+			void Msg(char* channel, char* fmt, ...);
+			
 		}
 	}
 }
