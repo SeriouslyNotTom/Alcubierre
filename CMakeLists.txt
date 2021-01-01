@@ -30,7 +30,21 @@ target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARY})
 if(WIN32)
 	#synthetic means being built on a platform that is not native to the build type
 	target_link_libraries(${PROJECT_NAME} gdi32 kernel32 psapi)
+	
+    #tronkko/dirent
+    add_subdirectory(${PROJECT_SOURCE_DIR}/lib/src/dirent-master)
+    include_directories(${PROJECT_SOURCE_DIR}/lib/src/dirent-master/include)
+
+	#libs for stuff that is crappy, slow or inconvience to compile every time
+	file(GLOB_RECURSE WINDOWS_STATIC_LIBS ${PROJECT_SOURCE_DIR}/lib/win64/*.lib)
+	target_link_libraries(${PROJECT_NAME} ${WINDOWS_STATIC_LIBS})
 endif(WIN32)
+
+#copy windows precompiled dlls into output folder
+if(WIN32 OR SYNTHETIC)
+	file(GLOB WINDOWS_DLLS "${PROJECT_SOURCE_DIR}/output/runtime/requirements/*" )
+	file(COPY ${WINDOWS_DLLS} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
+endif()
 
 if(UNIX)
 	target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/linux/libsteam_api.so)
@@ -43,7 +57,7 @@ endif(APPLE)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(GLFW_DIR "${PROJECT_SOURCE_DIR}/lib/src/glfw-3.3.2")
+set(GLFW_DIR "${PROJECT_SOURCE_DIR}/lib/src/glfw")
 include_directories("${GLFW_DIR}/include")
 add_subdirectory(${GLFW_DIR})
 target_link_libraries(${PROJECT_NAME} glfw)

@@ -20,7 +20,7 @@ void WindowCallback(WindowInstance* window)
 	window->window_height = 900;
 	window->glfw_monitor = NULL;
 	window->window_title = PROJECT_NAME_READABLE;
-	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, true);
+	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, false);
 	#if defined(__linux__) || defined(__APPLE__)
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -64,16 +64,10 @@ int main(int argc, char* argv[])
 
 	Alcubierre::Render::Text(1, 1, "niceword");
 
-	//IPLhandle context{ nullptr };
-	//iplCreateContext(nullptr, nullptr, nullptr, &context);
 	auto const samplingrate = 44100;
 	auto const framesize = 1024;
-	//IPLRenderingSettings settings{ samplingrate, framesize };
-	//IPLhandle renderer{ nullptr };
-	//IPLHrtfParams hrtfParams{ IPL_HRTFDATABASETYPE_DEFAULT, nullptr, 0};
-	//iplCreateBinauralRenderer(context, settings, hrtfParams, &renderer);
 
-	clear_col[0] = 0.07843137254901960784313725490196f; clear_col[1] = 0.0f; clear_col[2] = 0.15686274509803921568627450980392f; clear_col[3] = 0.5f;
+	clear_col[0] = 0.07843137254901960784313725490196f; clear_col[1] = 0.0f; clear_col[2] = 0.15686274509803921568627450980392f; clear_col[3] = 1.0f;
 
 	ImGuiInstance.AcceptWindow(Alcubierre::Engine::PrimaryWindow);
 	ImGuiInstance.Init();
@@ -85,6 +79,8 @@ int main(int argc, char* argv[])
 
 	glfwMakeContextCurrent(Alcubierre::Engine::PrimaryWindow->glfw_window);
 	glfwSwapInterval(0);
+
+	glfwShowWindow(Alcubierre::Engine::PrimaryWindow->glfw_window);
 
 	while (!glfwWindowShouldClose(Alcubierre::Engine::PrimaryWindow->glfw_window))
 	{
