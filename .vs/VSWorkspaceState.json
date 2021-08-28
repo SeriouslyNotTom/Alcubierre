@@ -3,13 +3,14 @@
     "",
     "\\src",
     "\\src\\Alcubierre",
-    "\\src\\Alcubierre\\IO",
+    "\\src\\Alcubierre\\Engine",
     "\\src\\Alcubierre\\Libraries",
-    "\\src\\Alcubierre\\Libraries\\Utilities",
-    "\\src\\DevGame",
-    "\\temp",
-    "\\toolchains"
+    "\\src\\Alcubierre\\Libraries\\Render",
+    "\\src\\Alcubierre\\Libraries\\Render\\Backend",
+    "\\src\\Alcubierre\\Libraries\\Render\\Backend\\OpenGL",
+    "\\src\\Alcubierre\\Libraries\\Render\\Backend\\Vulkan",
+    "\\src\\Alcubierre\\Tests"
   ],
-  "SelectedNode": "\\CMakeLists.txt",
+  "SelectedNode": "\\src\\Alcubierre\\Libraries\\Render\\Renderer.h",
   "PreviewInSolutionExplorer": false
 }

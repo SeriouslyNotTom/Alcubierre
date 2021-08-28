@@ -1,8 +1,11 @@
 #pragma once
 #define GLFW_INCLUDE_NONE
 #include <iostream>
-#include <Alcubierre/Engine.h>
+#include <Alcubierre/Engine/Engine.h>
 #include <Alcubierre/build_info.h>
+#include <map>
+#include <stdlib.h>
+#include <vector>
 
 struct _Info
 {
@@ -25,4 +28,5 @@ namespace Alcubierre
 	void Accept_Arguments(int argc, char* argv);
 	void Initialize_Core();
 	void Exit(int code);
+	void update();
 }

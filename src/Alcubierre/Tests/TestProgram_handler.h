@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Alcubierre/Libraries/Debug/Debug_interface.h>
-#include <Alcubierre/Engine.h>
+#include <Alcubierre/Engine/Engine.h>
 #include <vector>
 
 class Test_Program
@@ -25,3 +25,8 @@ public:
 	void AddProgram(Test_Program* program);
 	void AddProgramImGui(ImGui_Render* program);
 };
+
+namespace testprogram
+{
+	void init();
+}

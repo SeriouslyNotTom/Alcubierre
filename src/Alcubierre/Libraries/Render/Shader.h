@@ -30,7 +30,13 @@ public:
 		}
 	}
 
-	static GLuint CompileShader(const char* vert_shad_path,const char* frag_shad_path)
+	static GLuint CompileShaderFromSource_Char(const char* vertcode, const char* fragcode)
+	{
+		GLuint program_id;
+		return program_id;
+	}
+
+	static GLuint CompileShader(const char* vert_shad_path, const char* frag_shad_path)
 	{
 		const char* vert_shad_code = util_file::LoadFile_ifstream(vert_shad_path);
 		const char* frag_shad_code = util_file::LoadFile_ifstream(frag_shad_path);
