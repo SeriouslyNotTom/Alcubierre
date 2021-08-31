@@ -13,11 +13,11 @@ class ImGui_Handler : public Alcubierre::Renderer::IRenderable
 {
 private:
 	std::vector<ImGui_Render*> ImGuiObjs;
-	Alcubierre::Engine::Window::WindowInstance* window;
+	Alcubierre::Engine::Window::ALCB_Window* window;
 	void ImGui_Frame_Start();
 	void ImGui_Frame_End();
 public:
-	void AcceptWindow(Alcubierre::Engine::Window::WindowInstance* window);
+	void AcceptWindow(Alcubierre::Engine::Window::ALCB_Window* window);
 	void ApplyColors();
 	void ApplyStyles();
 	void Init();

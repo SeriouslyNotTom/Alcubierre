@@ -4,7 +4,7 @@
 #define PROJECT_VER_TYPE "IDB"
 #define PROJECT_VER  "0.1.0.0"
 #define PROJECT_NAME_READABLE "Alcubierre"
-#define PROJECT_BUILD_DATE "2021-08-27"
+#define PROJECT_BUILD_DATE "2021-08-29"
 #define PROJECT_OS "Windows"
 #define PROJECT_BUILD_TYPE "Debug"
 

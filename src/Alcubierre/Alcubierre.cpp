@@ -16,6 +16,8 @@ int Alcubierre::argc = NULL;
 char* Alcubierre::argv = NULL;
 bool Alcubierre::Debug_Mode = true;
 Alcubierre::ALCB_Engine* Alcubierre::Engine::engine_core = NULL;
+std::function<void()>** Alcubierre::ban_list;
+std::vector<std::function<void()>> Alcubierre::hook_list;
 
 using namespace Alcubierre;
 
@@ -76,12 +78,24 @@ void Alcubierre::Initialize_Core()
 
 	Alcubierre::Engine::engine_core = new Alcubierre::ALCB_Engine();
 
+	ban_list = new std::function<void()>*[64];
+	hook_list = std::vector<std::function<void()>>();
+
+}
+
+bool Alcubierre::addHook(std::function<void()> func)
+{
+	hook_list.push_back(func);
+	return true;
 }
 
 void Alcubierre::update()
 {
 	Engine::engine_core->tick();
-	
+	for each (std::function<void()> var in hook_list)
+	{
+		var();
+	}
 }
 
 void Alcubierre::Accept_Arguments(int argc, char* argv)

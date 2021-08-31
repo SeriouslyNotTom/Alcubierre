@@ -6,6 +6,8 @@
 #include <map>
 #include <stdlib.h>
 #include <vector>
+#include <memory>
+#include <functional>
 
 struct _Info
 {
@@ -25,8 +27,11 @@ namespace Alcubierre
 	static _Basic_Config Basic_Config;
 	extern int argc;
 	extern char* argv;
+	extern std::vector<std::function<void()>> hook_list;
+	extern std::function<void()>** ban_list;
 	void Accept_Arguments(int argc, char* argv);
 	void Initialize_Core();
+	bool addHook(std::function<void()> func);
 	void Exit(int code);
 	void update();
 }

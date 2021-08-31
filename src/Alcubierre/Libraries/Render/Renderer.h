@@ -1,6 +1,7 @@
 #include <gl/GL.h>
 #include <vector>
 #include <map>
+#include <uuid.h>
 
 enum ALCB_Texture_state_
 {
@@ -13,7 +14,8 @@ enum ALCB_Texture_state_
 
 struct ALCB_Texture
 {
-	
+	UUID texture_handle;
+	std::string texture_name;
 	ALCB_Texture_state_ load_state;
 	GLuint gl_texture_id;
 	char* raw_bytes;

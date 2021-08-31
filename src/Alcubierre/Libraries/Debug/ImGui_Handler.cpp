@@ -18,7 +18,7 @@ void ImGui_Handler::ImGui_Frame_Start()
 	}
 }
 
-void ImGui_Handler::AcceptWindow(Alcubierre::Engine::Window::WindowInstance* window_)
+void ImGui_Handler::AcceptWindow(Alcubierre::Engine::Window::ALCB_Window* window_)
 {
 	this->window = window_;
 }
@@ -97,7 +97,7 @@ void ImGui_Handler::Init()
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 	ImGui::StyleColorsDark();
-	ImGui_ImplGlfw_InitForOpenGL(window->glfw_window, true);
+	ImGui_ImplGlfw_InitForOpenGL(window->getGLFWWindowPtr(), true);
 	ImGui_ImplOpenGL3_Init("#version 150");
 	//ImGui::GetIO().FontGlobalScale = window_->scaling_factor;
 	ImGui_Handler::ApplyColors();

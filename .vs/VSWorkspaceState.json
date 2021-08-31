@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\Alcubierre",
+    "\\src\\Alcubierre\\Debug",
+    "\\src\\Alcubierre\\Debug\\Tripwire",
     "\\src\\Alcubierre\\Engine",
     "\\src\\Alcubierre\\Libraries",
-    "\\src\\Alcubierre\\Libraries\\Render",
-    "\\src\\Alcubierre\\Libraries\\Render\\Backend",
-    "\\src\\Alcubierre\\Libraries\\Render\\Backend\\OpenGL",
-    "\\src\\Alcubierre\\Libraries\\Render\\Backend\\Vulkan",
-    "\\src\\Alcubierre\\Tests"
+    "\\src\\Alcubierre\\Render",
+    "\\src\\Alcubierre\\Tests",
+    "\\src\\DevGame"
   ],
-  "SelectedNode": "\\src\\Alcubierre\\Libraries\\Render\\Renderer.h",
+  "SelectedNode": "\\src\\Alcubierre\\Debug\\Tripwire\\tripwire.h",
   "PreviewInSolutionExplorer": false
 }

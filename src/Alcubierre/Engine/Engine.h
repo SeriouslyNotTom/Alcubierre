@@ -157,7 +157,6 @@ namespace Alcubierre
 	private:
 		std::vector<ALCB_Scene> engine_scenes;
 		std::vector<ALCB_View> engine_views;
-		std::vector<Engine::Window::WindowInstance> windows;
 		Alcubierre::ALCB_Task_Manager taskman;
 
 	public:
@@ -174,8 +173,6 @@ namespace Alcubierre
 		extern Alcubierre::ALCB_Engine* engine_core;
 		
 		void Initialize();
-		extern Window::WindowInstance* PrimaryWindow;
-		void SpawnWindow(Window::WindowCreationCallback* NewWindowCallback);
 		void SetupContext();
 		void Tick();
 

@@ -11,7 +11,7 @@ void error_callback(int error, const char* description)
 }
 
 //i love you c++, i really do (totally not sarcasm)
-Alcubierre::Engine::Window::WindowInstance* Alcubierre::Engine::PrimaryWindow = NULL;
+
 std::unordered_map<char*, Alcubierre::Renderer::RenderQueueOBJ*>* Alcubierre::Renderer::RenderQueue = NULL;
 std::vector<Alcubierre::Renderer::IRenderable*> *Alcubierre::Renderer::RenderPointerQueue = NULL;
 
@@ -30,25 +30,17 @@ void Alcubierre::Engine::Initialize()
 
 void Alcubierre::Engine::SetupContext()
 {
-	glfwMakeContextCurrent(Alcubierre::Engine::PrimaryWindow->glfw_window);
+	/*glfwMakeContextCurrent(Alcubierre::Engine::PrimaryWindow->glfw_window);
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		Alcubierre::Debug::Log::Msg("Error", "Failed to create OpenGL Context");
 		Alcubierre::Exit(-1);
-	}
+	}*/
 }
 
 void Alcubierre::Engine::Tick()
 {
 
-}
-
-void Alcubierre::Engine::SpawnWindow(Window::WindowCreationCallback* NewWindowCallback)
-{
-	Alcubierre::Debug::Log::Msg("Alcubierre","Spawning Window...");
-	Alcubierre::Engine::PrimaryWindow = Window::createWindow(NewWindowCallback);
-	Alcubierre::Engine::SetupContext();
-	Alcubierre::Debug::Log::Msg("Alcubierre","Done");
 }
 
 bool Alcubierre::Renderer::Initialize()
@@ -82,34 +74,21 @@ void Alcubierre::Renderer::AddToQueue(IRenderable RenderableOBJ)
 {
 }
 
-void Alcubierre::Engine::Window::WindowInstance::CenterWindow()
-{
-	CenterWindow(glfw_monitor);
-}
-
-void Alcubierre::Engine::Window::WindowInstance::CenterWindow(GLFWmonitor* monitor)
-{
-	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	glfwSetWindowPos(glfw_window, (mode->width / 2) - (window_width / 2), (mode->height / 2) - (window_height / 2));
-}
-
-Alcubierre::Engine::Window::WindowInstance* Alcubierre::Engine::Window::createWindow(WindowCreationCallback* window_cb)
-{
-	using namespace Alcubierre::Engine::Window;
-	WindowInstance* Window = new WindowInstance();
-	(*window_cb)(Window);
-	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-	Window->glfw_window = glfwCreateWindow(Window->window_width, Window->window_height, Window->window_title, Window->glfw_monitor, Window->glfw_share_window);
-	glfwGetWindowSize(Window->glfw_window, &Window->window_width, &Window->window_height);
-	//allan please add code to detect which monitor the progam is running in, and maybe add that to a helper class
-	Window->glfw_monitor = glfwGetPrimaryMonitor();
-	Window->CenterWindow();
-	return Window;
-}
+//void Alcubierre::Engine::Window::WindowInstance::CenterWindow()
+//{
+//	CenterWindow(glfw_monitor);
+//}
+//
+//void Alcubierre::Engine::Window::WindowInstance::CenterWindow(GLFWmonitor* monitor)
+//{
+//	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+//	glfwSetWindowPos(glfw_window, (mode->width / 2) - (window_width / 2), (mode->height / 2) - (window_height / 2));
+//}
 
 void ALCB_Engine::init()
 {
 	taskman = Alcubierre::ALCB_Task_Manager();
+	
 }
 
 void ALCB_Engine::registerTask(ALCB_TASK* task)
