@@ -1,5 +1,5 @@
-#if you are wondering why i'm not ignoring the entire vs dir, its beause vs stores launch configs in there (eg. launch without steam and other command line parameters)
 .vs
+.vscode
 VSWorkspaceState.json
 
 #cmake stuff
