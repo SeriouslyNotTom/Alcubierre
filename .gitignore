@@ -17,6 +17,7 @@ CTestTestfile.cmake
 
 #artifacts
 output/debug
+output/runtime/debug
 output/install
 
 #src files
